@@ -1,12 +1,16 @@
 import Navbar from '@/Components/Navbar/Navbar';
+import { apiClient } from '@/lib/api-client';
+import { SIGNIN_ROUTES } from '../../../Constants.js';
 import React, { useState } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: ''
   });
+  const Navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,10 +20,26 @@ function LoginPage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Handle form submission logic
     console.log('Form Data:', formData);
+    const { username, password } = formData;
+    try {
+      const response = await apiClient.post(SIGNIN_ROUTES, { username, password });
+      console.log('Login Response:', response);
+
+      // Redirect to dashboard
+      if (response.status === 200) {
+        localStorage.setItem('user', JSON.stringify(response));
+        Navigate('/'); // Redirect to the dashboard or any other route
+      }
+      
+    } catch (error) {
+      console.error('Login Error:', error);
+      
+    }
+
   };
 
   return (
@@ -42,11 +62,11 @@ function LoginPage() {
           <div className="flex items-center border-b border-gray-300 pb-2">
             <FaEnvelope className="text-green-600 mr-3" />
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="text"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
-              placeholder="Email"
+              placeholder="Username"
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               required
             />

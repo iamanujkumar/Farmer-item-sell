@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
-import { FaUser, FaSignInAlt, FaBars, FaTimes, FaHome, FaInfoCircle } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { FaUser, FaSignInAlt, FaBars, FaTimes, FaHome, FaInfoCircle,FaSignOutAlt } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const user  = localStorage.getItem('user');
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      setIsLoggedIn(true);
+    }
+  }, []);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+  const handleLogout = () => {
+    // Logic for logging out the user
+    localStorage.clear();
+    setIsLoggedIn(false);
   };
 
   return (
@@ -49,22 +61,37 @@ const Navbar = () => {
               <span className=" md:inline">About</span>
             </div>
           </a>
-          <a
-            href="/login"
-            className="block bg-white text-green-800 px-4 py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-gray-200 transition-colors md:bg-transparent md:text-white md:hover:bg-transparent md:border md:border-white"
-          >
-            <FaSignInAlt className="text-green-800 md:text-white" />
-            <span className=" md:inline">Login</span>
-          </a>
+          {isLoggedIn ? (
+        <a
+          href="#"
+          onClick={handleLogout}
+          className="block bg-white text-green-800 px-4 py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-gray-200 transition-colors md:bg-transparent md:text-white md:hover:bg-transparent md:border md:border-white"
+        >
+          <FaSignOutAlt className="text-green-800 md:text-white" />
+          <span className="md:inline">Logout</span>
+        </a>
+      ) : (
+        <a
+          href="/login"
+          className="block bg-white text-green-800 px-4 py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-gray-200 transition-colors md:bg-transparent md:text-white md:hover:bg-transparent md:border md:border-white"
+        >
+          <FaSignInAlt className="text-green-800 md:text-white" />
+          <span className="md:inline">Login</span>
+        </a>
+      )}
         </div>
       </div>
 
       {/* Profile Logo */}
-      <div className="hidden md:flex items-center">
+     {
+      isLoggedIn ? (
+        <div className="hidden md:flex items-center">
         <button className="bg-green-700 p-2 rounded-full hover:bg-green-600 transition-colors">
           <FaUser className="text-white" size={24} />
         </button>
       </div>
+      ): (<h1 className='hidden md:flex'></h1>)
+     }
     </nav>
   );
 };

@@ -18,6 +18,48 @@ const upload = multer({ storage });
 // Create an express router
 const router = express.Router();
 
+
+// router.get("/", verifyToken, async (req,res) => {
+//     try {
+//         const items = await Item.find({ userId: req.userId });
+//         res.json(items);
+//     } catch (error) {
+//         console.error("Error fetching items:", error);
+//         res.status(500).json({ message: "Error fetching items" });
+//     }
+// });
+
+// fetch all items of a user
+
+router.get("/", async (req,res) => {
+    try {
+        const items = await Item.find({}); // Fetch all items of a user
+        res.json(items);
+    } catch (error) {
+        console.error("Error fetching items:", error);
+        res.status(500).json({ message: "Error fetching items" });
+    }
+});
+
+// fetch a single item by id
+
+// router.get("/:id", async (req,res) => {
+//     const id = req.params.id.toString();
+//     try {
+//         const item = await Item.findOne({
+//             _id: id,
+//             userId: req.userId,
+//         });
+//         if (!item) {
+//             return res.status(404).json({ message: "Item not found" });
+//         }
+//         res.json(item);
+//     } catch (error) {
+//         console.error("Error fetching item:", error);
+//         res.status(500).json({ message: "Error fetching item" });
+//     }
+// });
+
 // Route to add an item
 router.post('/add', verifyToken, upload.array('images', 5), async (req, res) => {
     try {

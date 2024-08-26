@@ -8,7 +8,8 @@ const verifyToken = (req, res, next) => {
         return res.status(403).json({ message: "No token provided!" });
     }
 
-    jwt.verify(token.split(" ")[1], process.env.SECRET_KEY, (err, decoded) => {
+    const bearerToken = token.split(" ")[1];
+    jwt.verify(bearerToken, process.env.SECRET_KEY, (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: "Unauthorized!" });
         }
@@ -16,5 +17,6 @@ const verifyToken = (req, res, next) => {
         next();
     });
 };
+
 
 export default verifyToken;

@@ -6,11 +6,11 @@ import jwt from "jsonwebtoken";
 
 const login = async (req, res) => {
     const { username, password } = req.body;
+    console.log(username, password);
 
     if (!username || !password) {
         return res.status(400).json({ message: "Please provide username and password." });
     }
-
     try {
         const user = await User.findOne({ username });
         if (!user) {

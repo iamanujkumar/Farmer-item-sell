@@ -90,7 +90,7 @@ const Navbar = () => {
           <FaUser className="text-white" size={24} />
         </button>
       </div>
-      ): (<h1></h1>)
+      ): (<h1 className='hidden md:flex'></h1>)
      }
     </nav>
   );

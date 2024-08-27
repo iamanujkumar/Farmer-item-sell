@@ -19,9 +19,10 @@ const upload = multer({ storage });
 const router = express.Router();
 
 // Route to add an item
-router.post('/add', verifyToken, upload.array('images', 5), async (req, res) => {
+router.post('/add', verifyToken,upload.array('images', 5), async (req, res) => {
     try {
-        const { name, description, category, city, state, price } = req.body;
+        const { itemName, description, category, city, state, price } = req.body;
+       
 
         // Access userId from the verified token
         const userId = req.userId;
@@ -45,7 +46,7 @@ router.post('/add', verifyToken, upload.array('images', 5), async (req, res) => 
         // Create the item
         const newItem = new Item({
             userId,
-            name,
+            itemName,
             description,
             category,
             city,
@@ -53,6 +54,7 @@ router.post('/add', verifyToken, upload.array('images', 5), async (req, res) => 
             price,
             imagesUrl,
         });
+        console.log(newItem);
 
         await newItem.save();
         res.status(201).json(newItem);

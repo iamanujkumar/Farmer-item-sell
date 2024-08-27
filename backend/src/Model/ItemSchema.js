@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const itemSchema = new mongoose.Schema({
     userId: { type: String, required: true },
-    name: { type: String, required: true },
+    itemName: { type: String, required: true },
     description: { type: String, required: true },
     category: { type: String, required: true },
     city: { type: String, required: true }, // New field

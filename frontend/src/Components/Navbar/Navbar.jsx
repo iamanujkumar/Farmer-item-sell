@@ -55,7 +55,7 @@ const Navbar = () => {
               <span className=" md:inline">Home</span>
             </div>
           </a>
-          <a href="#" className="block px-4 py-2 text-center hover:bg-green-700 transition-colors md:hover:bg-green-600 rounded-lg">
+          <a href="/add" className="block px-4 py-2 text-center hover:bg-green-700 transition-colors md:hover:bg-green-600 rounded-lg">
             <div className="flex items-center space-x-2">
               <FaInfoCircle size={20} />
               <span className=" md:inline">About</span>

@@ -7,6 +7,7 @@ import HomePage from './Pages/Home/HomePage'
 import NoPage from './Pages/NoPage/NoPage'
 import LoginPage from './Pages/Login/LoginPage'
 import SignupPage from './Pages/Registration/SignupPage'
+import AddItem from './Pages/AddItem/AddItem'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
       <Route path="/*" element={<NoPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/add" element={<AddItem />} />
 
       
       </Routes>

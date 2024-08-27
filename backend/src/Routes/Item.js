@@ -63,7 +63,8 @@ router.get("/", async (req,res) => {
 // Route to add an item
 router.post('/add', verifyToken,upload.array('images', 5), async (req, res) => {
     try {
-        const { name, description, category, city, state, price } = req.body;
+
+        const { name, description,number, category,quantity, city, state, price } = req.body;
 
         // Access userId from the verified token
         const userId = req.userId;

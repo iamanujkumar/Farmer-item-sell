@@ -4,7 +4,9 @@ const itemSchema = new mongoose.Schema({
     userId: { type: String, required: true },
     name: { type: String, required: true },
     description: { type: String, required: true },
+    number : {type: String, required:true},
     category: { type: String, required: true },
+    quantity:{ type: Number, required: true},
     city: { type: String, required: true }, // New field
     state: { type: String, required: true }, // New field
     price: { type: Number, required: true },

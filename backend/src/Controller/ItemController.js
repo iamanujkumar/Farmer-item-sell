@@ -1,5 +1,5 @@
 import express from 'express';
-import Item from '../Model/ItemSchema.js'; // Replace with your actual model
+import Item from '../Model/ItemSchema.js';
 import { param, validationResult }  from 'express-validator';
 
 const router = express.Router();

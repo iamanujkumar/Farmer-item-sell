@@ -64,10 +64,11 @@ router.get("/", async (req,res) => {
 router.post('/add', verifyToken,upload.array('images', 5), async (req, res) => {
     try {
 
-        const { name, description,number, category,quantity, city, state, price } = req.body;
+        const { itemName, description,number, category,quantity, city, state, price,userId} = req.body;
 
         // Access userId from the verified token
-        const userId = req.userId;
+        // const userId = req.userId;
+        console.log(userId)
 
         // Upload images to Cloudinary and get the URLs
         const imagesUrl = await Promise.all(

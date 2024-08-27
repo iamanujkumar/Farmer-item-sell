@@ -27,11 +27,12 @@ function LoginPage() {
     const { username, password } = formData;
     try {
       const response = await apiClient.post(SIGNIN_ROUTES, { username, password });
-      console.log('Login Response:', response.data.token);
+      console.log('Login Response:', response);
 
       // Redirect to dashboard
       if (response.status === 200) {
         localStorage.setItem('user', response);
+        localStorage.setItem('_id', response.data.user._id);
         Navigate('/'); // Redirect to the dashboard or any other route
       }
       

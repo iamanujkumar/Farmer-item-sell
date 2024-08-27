@@ -15,13 +15,15 @@ const AddItem = () => {
   const [image, setImage] = useState(null);
 
   const user = localStorage.getItem("user");
-  console.log(user)
+  const userId = localStorage.getItem("_id");
+
+  console.log(userId)
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     // Handle form submission logic
     try {
-        const response = await apiClient.post(ADD_ITEM, { itemName, description, category, city, state, price });
+        const response = await apiClient.post(ADD_ITEM, { itemName, description, category, city, state, price,userId });
         console.log(response)
         
     } catch (error) {

@@ -65,7 +65,7 @@ function Category() {
       <div
         className={`fixed inset-y-0 left-0 transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:relative md:translate-x-0 w-auto max-w-xs bg-green-100 p-6 transition-transform duration-300 ease-in-out z-50 overflow-y-auto`}
+        } md:relative md:translate-x-0 w-64 max-w-xs bg-green-100 p-6 transition-transform duration-300 ease-in-out z-50 overflow-y-auto`}
         style={{ maxHeight: '100vh' }} // Ensure the sidebar does not exceed viewport height
       >
         {/* Close Button in Sidebar */}

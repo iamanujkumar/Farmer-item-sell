@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "./SignOutButton";
-
+import { FaUserCircle } from "react-icons/fa";
 const Header = () => {
   const { isLoggedIn } = useAppContext();
 
@@ -14,6 +14,9 @@ const Header = () => {
         <span className="flex space-x-2">
           {isLoggedIn ? (
             <>
+              <Link to="/profile" className="text-gray text-3xl hover:text-gray-300">
+                <FaUserCircle /> 
+              </Link>
               {/* add items field here */}
               <SignOutButton />
             </>

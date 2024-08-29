@@ -5,6 +5,7 @@ import SignIn from "./Pages/SignIn";
 import { useAppContext } from "./contexts/AppContext";
 import Home from './Pages/Home'
 import AddItem from "./Pages/AddItemPage/AddItem";
+import Profile from "./Pages/Profile/Profile";
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
         </Layout>} />
         <Route path="/register" element={<Layout><Register/></Layout>} />
         <Route path="/sign-in" element={<Layout><SignIn/></Layout>}/>
-
+       
         {isLoggedIn && (
           <>
           <Route 
@@ -28,8 +29,17 @@ function App() {
               <AddItem/>
             </Layout>
           }/>
-
+           <Route 
+        path="/profile"  
+       element={
+          <Layout>
+          <Profile />
+          </Layout>
+} 
+/>
           </>
+
+
         )}
 
         <Route path="*" element={<Navigate to="/" />} />

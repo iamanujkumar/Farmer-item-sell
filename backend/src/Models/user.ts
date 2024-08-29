@@ -7,6 +7,9 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
+    profilePic: { type: String }, // Changed from profilePicture to profilePic
+    location: { type: String },
+    bio: { type: String },
 });
 
 userSchema.pre("save", async function (next) {

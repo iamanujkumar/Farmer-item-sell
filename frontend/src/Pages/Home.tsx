@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import Navbar from '../components/Navbar/Navbar';
 
 interface Item {
   name: string;
   category: string;
   price: number;
 }
-
 const Home: React.FC = () => {
   const [searchName, setSearchName] = useState<string>('');
   const [searchCategory, setSearchCategory] = useState<string>('');
@@ -62,6 +62,8 @@ const Home: React.FC = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div>
       <h1>Home Page</h1>
       <div>
@@ -121,6 +123,7 @@ const Home: React.FC = () => {
         </ul>
       </div>
     </div>
+    </>
   );
 };
 

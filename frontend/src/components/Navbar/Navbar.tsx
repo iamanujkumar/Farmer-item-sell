@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -29,12 +29,12 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-4 items-center">
-          <li className="text-white hover:text-green-200 cursor-pointer">Home</li>
-          <li className="text-white hover:text-green-200 cursor-pointer">About Us</li>
-          <li className="text-white hover:text-green-200 cursor-pointer">Products</li>
-          <li className="text-white hover:text-green-200 cursor-pointer">Login</li>
-          <li className="text-white hover:text-green-200 cursor-pointer">Signup</li>
-          <li className="text-white hover:text-green-200 cursor-pointer">Mandi Bhav</li>
+          <li className="text-white hover:text-green-200 cursor-pointer"><Link to={'/'}>Home</Link></li>
+          <li className="text-white hover:text-green-200 cursor-pointer"><Link to={'/aboutus'}>About Us</Link></li>
+          <li className="text-white hover:text-green-200 cursor-pointer"><Link to={'/products'}>Products</Link></li>
+          <li className="text-white hover:text-green-200 cursor-pointer"><Link to={'/login'}>Login</Link></li>
+          <li className="text-white hover:text-green-200 cursor-pointer"><Link to={'/signup'}>Signup</Link></li>
+          <li className="text-white hover:text-green-200 cursor-pointer"><Link to={'/mandibhavs'}>Mandi Bhav</Link></li>
           <li className="text-white hover:text-green-200 cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 11a4 4 0 010-5.657A4 4 0 0110.243 11M8 21v-4m0-4v4M8 9a3 3 0 100-6 3 3 0 000 6z" />
@@ -55,12 +55,12 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <ul className="md:hidden">
-          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer">Home</li>
-          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer">About Us</li>
-          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer">Products</li>
-          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer">Login</li>
-          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer">Signup</li>
-          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer">Mandi Bhav</li>
+          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer"><Link to={'/'}>Home</Link></li>
+          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer"><Link to={'/aboutus'}>About Us</Link></li>
+          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer"><Link to={'/products'}>Products</Link></li>
+          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer"><Link to={'/login'}>Login</Link></li>
+          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer"><Link to={'/signup'}>Signup</Link></li>
+          <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer"><Link to={'/mandibhavs'}>Mandi Bhav</Link></li>
           <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 11a4 4 0 010-5.657A4 4 0 0110.243 11M8 21v-4m0-4v4M8 9a3 3 0 100-6 3 3 0 000 6z" />

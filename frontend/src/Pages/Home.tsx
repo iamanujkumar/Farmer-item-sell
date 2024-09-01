@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
+import CategorySection from '../components/Category/Category';
 
 interface Item {
   name: string;
@@ -123,6 +125,8 @@ const Home: React.FC = () => {
         </ul>
       </div>
     </div>
+    <CategorySection />
+    {/* <Footer  */}
     </>
   );
 };

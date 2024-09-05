@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaRobot } from 'react-icons/fa'; 
 import { AiOutlineClose } from 'react-icons/ai'; 
 import ChatAI from '../GenAI_Chatbot/Chatbot'
+import HeroPage from '../components/HeroPage';
 
 interface Item {
   name: string;
@@ -70,64 +70,9 @@ const Home: React.FC = () => {
 
   return (
     <div className="relative">
-      <h1>Home Page</h1>
       
-      <div>
-        <h2>Search by Name</h2>
-        <input 
-          type="text" 
-          placeholder="Enter name" 
-          value={searchName}
-          onChange={(e) => setSearchName(e.target.value)}
-        />
-        <button onClick={handleSearchByName}>Search by Name</button>
-      </div>
 
-      <div>
-        <h2>Search by Category</h2>
-        <input 
-          type="text" 
-          placeholder="Enter category" 
-          value={searchCategory}
-          onChange={(e) => setSearchCategory(e.target.value)}
-        />
-        <button onClick={handleSearchByCategory}>Search by Category</button>
-      </div>
-
-      <div>
-        <h2>Search by Price Range</h2>
-        <input 
-          type="text" 
-          placeholder="Enter price range" 
-          value={priceRange}
-          onChange={(e) => setPriceRange(e.target.value)}
-        />
-        <button onClick={handleSearchByPriceRange}>Search by Price Range</button>
-      </div>
-
-      <div>
-        <h2>Pagination</h2>
-        <input 
-          type="number" 
-          placeholder="Enter page number" 
-          value={page}
-          onChange={(e) => setPage(Number(e.target.value))}
-        />
-        <button onClick={handlePagination}>Go to Page</button>
-      </div>
-
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      <div>
-        <h3>Results:</h3>
-        <ul>
-          {results.map((item, index) => (
-            <li key={index}>
-              <strong>{item.name}</strong> - {item.category} - ${item.price}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* CHATBOT */}
 
      
       <div 

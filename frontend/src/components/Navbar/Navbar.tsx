@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Brand Name */}
         <div className="text-white text-2xl font-bold">
-          <Link to="/">Farmers</Link>
+          Brand
         </div>
 
         {/* Search Bar */}

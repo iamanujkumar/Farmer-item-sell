@@ -9,6 +9,7 @@ import Profile from "./Pages/Profile/Profile";
 import NoPage from "./Pages/NoPage/NoPage";
 import AllProduct from "./Pages/AllProduct/AllProduct";
 import ProductInfo from "./Pages/ProductInfo/ProductInfo";
+import HeroPage from "./components/HeroPage";
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Layout>
-          <Home/>
+          <HeroPage/>
         </Layout>} />
         <Route path="/register" element={<Layout><Register/></Layout>} />
         <Route path="/sign-in" element={<Layout><SignIn/></Layout>}/>

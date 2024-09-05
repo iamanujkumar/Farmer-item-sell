@@ -6,6 +6,7 @@ import { useAppContext } from "./contexts/AppContext";
 import Home from './Pages/Home'
 import AddItem from "./Pages/AddItemPage/AddItem";
 import Profile from "./Pages/Profile/Profile";
+import Mandi_Bhav from "./Pages/Mandi_Bhav/Mandi_Bhav";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         </Layout>} />
         <Route path="/register" element={<Layout><Register/></Layout>} />
         <Route path="/sign-in" element={<Layout><SignIn/></Layout>}/>
+        <Route path="/mandi" element={<Layout><Mandi_Bhav/></Layout>}/>
        
         {isLoggedIn && (
           <>

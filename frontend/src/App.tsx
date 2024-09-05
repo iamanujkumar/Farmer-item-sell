@@ -37,6 +37,15 @@ function App() {
               <AddItem/>
             </Layout>
           }/>
+
+<Route 
+          path="/add-cart"
+          element={
+            <Layout>
+              <Cart/>
+            </Layout>
+          }/>
+
            <Route 
         path="/profile"  
        element={
@@ -45,6 +54,7 @@ function App() {
           </Layout>
 } 
 />
+
           </>
 
 

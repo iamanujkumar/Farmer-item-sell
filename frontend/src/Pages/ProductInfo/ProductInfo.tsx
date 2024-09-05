@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-import { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-=======
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart, deleteFromCart } from '../../redux/CartSlice';
->>>>>>> cdc35d306ffc264e99e1c19875a9725c3706410d
 
 const ProductInfo = () => {
   const [product, setProduct] = useState(null);
@@ -32,7 +27,7 @@ const deleteCart = (item) => {
       const response = await axios.get(`http://localhost:8000/api/searchItems/${id}`);
       await setLoading(false);
       console.log(response.data);
-      setProduct(response.data); // Accessing the nested `data` field
+      setProduct(response.data); // Accessing the nested data field
     } catch (error) {
       console.error('Error fetching products:', error);
     }

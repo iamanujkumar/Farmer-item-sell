@@ -9,6 +9,7 @@ import Profile from "./Pages/Profile/Profile";
 import NoPage from "./Pages/NoPage/NoPage";
 import AllProduct from "./Pages/AllProduct/AllProduct";
 import ProductInfo from "./Pages/ProductInfo/ProductInfo";
+import Cart from "./Pages/Cart/Cart";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/productInfo/:id" element={<Layout><ProductInfo/></Layout>} />
         <Route path="/*" element={<NoPage/>}/>
         <Route path="/products" element={<Layout><AllProduct/></Layout>}/>
+        <Route path="/cart" element={<Layout><Cart/></Layout>}/>
        
         {isLoggedIn && (
           <>

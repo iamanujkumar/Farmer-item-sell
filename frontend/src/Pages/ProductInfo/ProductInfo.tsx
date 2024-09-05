@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -5,31 +6,20 @@ const ProductInfo = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const id  = '1';
+  const {id}  = useParams();
 
+  const getProduct = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/searchItems/search/${id}`);
+      console.log(response.data.data);
+      setProduct(response.data.data); // Accessing the nested `data` field
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
   useEffect(() => {
     // Dummy data to simulate the product details
-    const dummyData = {
-      id: '1',
-      itemName: 'Fresh Organic Tomatoes',
-      price: 50,
-      rating: 4.5,
-      description: 'Fresh and juicy organic tomatoes, perfect for salads and cooking.',
-      imagesUrl: ['https://via.placeholder.com/400'],
-      location: {
-        city: 'Mumbai',
-        state: 'Maharashtra',
-      },
-    };
-
-    // Simulate fetching data by using the id from the URL
-    if (id === dummyData.id) {
-      setProduct(dummyData);
-      setLoading(false);
-    } else {
-      setError('Product not found.');
-      setLoading(false);
-    }
+    getProduct();
   }, [id]);
 
   const renderStars = (rating) => {

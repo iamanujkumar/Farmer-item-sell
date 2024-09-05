@@ -27,7 +27,7 @@ const deleteCart = (item) => {
       const response = await axios.get(`http://localhost:8000/api/searchItems/${id}`);
       await setLoading(false);
       console.log(response.data);
-      setProduct(response.data); // Accessing the nested `data` field
+      setProduct(response.data); // Accessing the nested data field
     } catch (error) {
       console.error('Error fetching products:', error);
     }

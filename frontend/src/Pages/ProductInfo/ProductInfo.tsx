@@ -1,36 +1,46 @@
+<<<<<<< HEAD
 import { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
+=======
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { addToCart, deleteFromCart } from '../../redux/CartSlice';
+>>>>>>> cdc35d306ffc264e99e1c19875a9725c3706410d
 
 const ProductInfo = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const id  = '1';
+  const {id}  = useParams();
 
+  const cartItems=useSelector((state)=>state.cart);
+  const dispatch=useDispatch();
+
+  const addCart = (item) => {
+    // console.log(item)
+    dispatch(addToCart(item));
+}
+
+const deleteCart = (item) => {
+    dispatch(deleteFromCart(item));
+}
+
+  const getProduct = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/searchItems/${id}`);
+      await setLoading(false);
+      console.log(response.data);
+      setProduct(response.data); // Accessing the nested `data` field
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
   useEffect(() => {
     // Dummy data to simulate the product details
-    const dummyData = {
-      id: '1',
-      itemName: 'Fresh Organic Tomatoes',
-      price: 50,
-      rating: 4.5,
-      description: 'Fresh and juicy organic tomatoes, perfect for salads and cooking.',
-      imagesUrl: ['https://via.placeholder.com/400'],
-      location: {
-        city: 'Mumbai',
-        state: 'Maharashtra',
-      },
-    };
-
-    // Simulate fetching data by using the id from the URL
-    if (id === dummyData.id) {
-      setProduct(dummyData);
-      setLoading(false);
-    } else {
-      setError('Product not found.');
-      setLoading(false);
-    }
-  }, [id]);
+    getProduct();
+  }, []);
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -87,14 +97,23 @@ const ProductInfo = () => {
             {/* Location */}
             <div className="mb-4">
               <h3 className="font-medium text-gray-800">Location:</h3>
-              <p className="text-gray-600">{product.location.city}, {product.location.state}</p>
+              <p className="text-gray-600">{product.city}, {product.state}</p>
             </div>
 
             {/* Buttons */}
             <div className="flex space-x-4">
-              <button className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
+              {cartItems.some((p)=>p._id===product._id)?
+              <button 
+              onClick={() => deleteCart(product)}
+              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
+                Delete from Cart
+              </button>:
+              <button 
+              onClick={() => addCart(product)}
+              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
                 Add to Cart
               </button>
+              }
               <button className="bg-green-800 text-white py-2 px-4 rounded hover:bg-green-900 transition-all">
                 Buy Now
               </button>

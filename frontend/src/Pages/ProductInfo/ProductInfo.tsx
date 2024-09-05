@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { addToCart, deleteFromCart } from '../../redux/CartSlice';
 
 const ProductInfo = () => {
   const [product, setProduct] = useState(null);
@@ -8,11 +10,24 @@ const ProductInfo = () => {
   const [error, setError] = useState(null);
   const {id}  = useParams();
 
+  const cartItems=useSelector((state)=>state.cart);
+  const dispatch=useDispatch();
+
+  const addCart = (item) => {
+    // console.log(item)
+    dispatch(addToCart(item));
+}
+
+const deleteCart = (item) => {
+    dispatch(deleteFromCart(item));
+}
+
   const getProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/searchItems/search/${id}`);
-      console.log(response.data.data);
-      setProduct(response.data.data); // Accessing the nested `data` field
+      const response = await axios.get(`http://localhost:8000/api/searchItems/${id}`);
+      await setLoading(false);
+      console.log(response.data);
+      setProduct(response.data); // Accessing the nested `data` field
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -20,7 +35,7 @@ const ProductInfo = () => {
   useEffect(() => {
     // Dummy data to simulate the product details
     getProduct();
-  }, [id]);
+  }, []);
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -77,14 +92,23 @@ const ProductInfo = () => {
             {/* Location */}
             <div className="mb-4">
               <h3 className="font-medium text-gray-800">Location:</h3>
-              <p className="text-gray-600">{product.location.city}, {product.location.state}</p>
+              <p className="text-gray-600">{product.city}, {product.state}</p>
             </div>
 
             {/* Buttons */}
             <div className="flex space-x-4">
-              <button className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
+              {cartItems.some((p)=>p._id===product._id)?
+              <button 
+              onClick={() => deleteCart(product)}
+              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
+                Delete from Cart
+              </button>:
+              <button 
+              onClick={() => addCart(product)}
+              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
                 Add to Cart
               </button>
+              }
               <button className="bg-green-800 text-white py-2 px-4 rounded hover:bg-green-900 transition-all">
                 Buy Now
               </button>

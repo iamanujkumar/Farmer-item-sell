@@ -1,70 +1,39 @@
 import {useDispatch,useSelector} from 'react-redux'
 import { decrementQuantity, deleteFromCart, increamentQuantity } from '../../redux/CartSlice';
 import { useEffect } from 'react';
-
-const products = [
-    {
-        id: 1,
-        name: 'Fresh Organic Apples',
-        href: '#',
-        price: '₹150/kg',
-        originalPrice: '₹180/kg',
-        discount: '17% Off',
-        location: 'Shimla, Himachal Pradesh',
-        imageSrc:
-            'https://example.com/apple-image.png',
-    },
-    {
-        id: 2,
-        name: 'Organic Basmati Rice',
-        href: '#',
-        price: '₹1200/quintal',
-        originalPrice: '₹1300/quintal',
-        discount: '8% Off',
-        location: 'Karnal, Haryana',
-        imageSrc:
-            'https://example.com/rice-image.png',
-    },
-    {
-        id: 3,
-        name: 'Fresh Red Chilli',
-        href: '#',
-        price: '₹350/kg',
-        originalPrice: '₹400/kg',
-        discount: '12% Off',
-        location: 'Guntur, Andhra Pradesh',
-        imageSrc:
-            'https://example.com/chilli-image.png',
-    },
-];
+import {SearchBar} from '../../components/Search/Search';
+import { fetchCurrentUser } from '../../Api/userApi';
 
 const Cart = () => {
-    // const cartItems=useSelector((state)=>state.cart);
-    // const dispatch=useDispatch();
+    const cartItems=useSelector((state)=>state.cart);
+    const dispatch=useDispatch();
 
-    // const deleteCart=(item)=>{
-    //     dispatch(deleteFromCart(item));
-    // }
+    const deleteCart=(item)=>{
+        dispatch(deleteFromCart(item));
+    }
 
-    // const handleIncrement=(id)=>{
-    //     dispatch(increamentQuantity(id));
-    // }
+    const handleIncrement=(id)=>{
+        dispatch(increamentQuantity(id));
+    }
 
-    // const handleDecrement=(id)=>{
-    //     dispatch(decrementQuantity(id));
-    // }
+    const handleDecrement=(id)=>{
+        dispatch(decrementQuantity(id));
+    }
 
-    // const cartItemTotal = cartItems.map(item => item.quantity).reduce((prevValue, currValue) => prevValue + currValue, 0);
+    const cartItemTotal = cartItems.map(item => item.quantity).reduce((prevValue, currValue) => prevValue + currValue, 0);
 
-    // const cartTotal = cartItems.map(item => item.price * item.quantity).reduce((prevValue, currValue) => prevValue + currValue, 0);
+    const cartTotal = cartItems.map(item => item.price * item.quantity).reduce((prevValue, currValue) => prevValue + currValue, 0);
 
-    // useEffect(() => {
-    //     localStorage.setItem('cart', JSON.stringify(cartItems));
-    // }, [cartItems])
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+        console.log(fetchCurrentUser());
+    }, [cartItems])
 
+    // const user=JSON.parse(localStorage.getItem('user'));
 
     return (
             <div className="container mx-auto px-4 max-w-7xl">
+                <SearchBar />
                 <div className="mx-auto max-w-2xl py-8 lg:max-w-7xl">
                     <h1 className="text-3xl font-bold tracking-tight text-green-800 sm:text-4xl">
                         Your Cart
@@ -79,13 +48,17 @@ const Cart = () => {
                                 Items in your cart
                             </h2>
                             <ul role="list" className="divide-y divide-gray-200">
-                                {products.map((product) => (
-                                    <div key={product.id} className="">
+                                {cartItems.length>0?
+                                <>
+                                    {cartItems.map((item,index) =>{ 
+                                    const {_id,itemName,quantity,price,imagesUrl,category,city,state}=item;
+                                    return(
+                                    <div key={index} className="">
                                         <li className="flex py-6 sm:py-6 ">
                                             <div className="flex-shrink-0">
                                                 <img
-                                                    src={product.imageSrc}
-                                                    alt={product.name}
+                                                    src={item.imagesUrl[0]}
+                                                    alt={item.itemName}
                                                     className="sm:h-38 sm:w-38 h-24 w-24 rounded-md object-contain object-center"
                                                 />
                                             </div>
@@ -94,23 +67,23 @@ const Cart = () => {
                                                     <div>
                                                         <div className="flex justify-between">
                                                             <h3 className="text-sm">
-                                                                <a href={product.href} className="font-semibold text-green-800">
-                                                                    {product.name}
-                                                                </a>
+                                                                <div className="font-semibold text-green-800">
+                                                                    {item.itemName}
+                                                                </div>
                                                             </h3>
                                                         </div>
                                                         <div className="mt-1 flex text-sm">
-                                                            <p className="text-sm text-gray-500">{product.location}</p>
+                                                            <p className="text-sm text-gray-500">{item.city}</p>
                                                         </div>
                                                         <div className="mt-1 flex items-end">
                                                             <p className="text-xs font-medium text-gray-500 line-through">
-                                                                {product.originalPrice}
+                                                                {item.price}
                                                             </p>
                                                             <p className="text-sm font-medium text-gray-900">
-                                                                &nbsp;&nbsp;{product.price}
+                                                                &nbsp;&nbsp;{item.price}
                                                             </p>
-                                                            &nbsp;&nbsp;
-                                                            <p className="text-sm font-medium text-green-500">{product.discount}</p>
+                                                            {/* &nbsp;&nbsp;
+                                                            <p className="text-sm font-medium text-green-500">{product.discount}</p> */}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,21 +91,31 @@ const Cart = () => {
                                         </li>
                                         <div className="mb-2 flex">
                                             <div className="min-w-24 flex">
-                                                <button type="button" className="h-7 w-7 bg-gray-200 rounded-full">
+                                                <button onClick={()=>handleDecrement(_id)} type="button" className="h-7 w-7 bg-gray-200 rounded-full">
                                                     -
                                                 </button>
                                                 <input
+                                                readOnly
                                                     type="text"
                                                     className="mx-1 h-7 w-9 rounded-md border text-center"
-                                                    defaultValue={1}
+                                                    value={1}
                                                 />
-                                                <button type="button" className="flex h-7 w-7 items-center justify-center bg-gray-200 rounded-full">
+                                                <button type="button" onClick={()=>handleIncrement(_id)}className="flex h-7 w-7 items-center justify-center bg-gray-200 rounded-full">
                                                     +
                                                 </button>
+                                                
                                             </div>
+                                            <div className="ml-6 flex text-sm">
+                                                            <button onClick={() => deleteCart(item)} type="button" className="flex items-center space-x-1 px-2 py-1 pl-0">
+                                                                <span className="text-xs font-medium text-red-500">Remove</span>
+                                                            </button>
+                                                        </div>
                                         </div>
                                     </div>
-                                ))}
+                                    )
+                                })}
+                                </>
+:<h1>Cart Empty</h1>}
                             </ul>
                         </section>
                         {/* Price Details Section with Glassy Effect */}
@@ -146,8 +129,8 @@ const Cart = () => {
                             <div>
                                 <dl className="space-y-1 px-2 py-4">
                                     <div className="flex items-center justify-between">
-                                        <dt className="text-sm text-gray-800">Price (3 items)</dt>
-                                        <dd className="text-sm font-medium text-gray-900">₹ 47,200</dd>
+                                        <dt className="text-sm text-gray-800">Price ({cartItemTotal} items)</dt>
+                                        <dd className="text-sm font-medium text-gray-900">₹ {cartTotal}</dd>
                                     </div>
                                     <div className="flex items-center justify-between pt-4">
                                         <dt className="text-sm text-gray-800">Discount</dt>
@@ -159,7 +142,7 @@ const Cart = () => {
                                     </div>
                                     <div className="flex items-center justify-between border-y border-dashed py-4 ">
                                         <dt className="text-base font-medium text-gray-900">Total Amount</dt>
-                                        <dd className="text-base font-medium text-gray-900">₹ 44,700</dd>
+                                        <dd className="text-base font-medium text-gray-900">₹ {cartTotal}</dd>
                                     </div>
                                 </dl>
                                 <div className="px-2 pb-4 font-medium text-green-700">

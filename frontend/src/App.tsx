@@ -6,6 +6,9 @@ import { useAppContext } from "./contexts/AppContext";
 import Home from './Pages/Home'
 import AddItem from "./Pages/AddItemPage/AddItem";
 import Profile from "./Pages/Profile/Profile";
+import NoPage from "./Pages/NoPage/NoPage";
+import AllProduct from "./Pages/AllProduct/AllProduct";
+import ProductInfo from "./Pages/ProductInfo/ProductInfo";
 
 function App() {
 
@@ -19,6 +22,9 @@ function App() {
         </Layout>} />
         <Route path="/register" element={<Layout><Register/></Layout>} />
         <Route path="/sign-in" element={<Layout><SignIn/></Layout>}/>
+        <Route path="/productInfo/:id" element={<Layout><ProductInfo/></Layout>} />
+        <Route path="/*" element={<NoPage/>}/>
+        <Route path="/products" element={<Layout><AllProduct/></Layout>}/>
        
         {isLoggedIn && (
           <>

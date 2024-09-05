@@ -79,8 +79,8 @@ router.get("/:id", [
 const constructSearchQuery = (queryParams: any) => {
     let constructedQuery: any = {};
 
-    if (queryParams.name) {
-        constructedQuery.name = new RegExp(queryParams.name, "i");
+    if (queryParams.itemName) {
+        constructedQuery.itemName = new RegExp(queryParams.itemName, "i");
     }
 
     if (queryParams.category) {

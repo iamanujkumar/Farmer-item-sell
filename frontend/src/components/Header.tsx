@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "./SignOutButton";
 import { FaUserCircle } from "react-icons/fa";
+import Navbar from "./Navbar/Navbar";
 const Header = () => {
   const { isLoggedIn } = useAppContext();
 
@@ -9,6 +10,7 @@ const Header = () => {
     <div className="">
       <div className="container mx-auto flex justify-between">
         <span className="text-3xl text-white font-bold tracking-tight">
+          <Navbar/>
           <Link to="/">Farmers</Link>
         </span>
         <span className="flex space-x-2">

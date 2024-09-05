@@ -9,6 +9,8 @@ import Profile from "./Pages/Profile/Profile";
 import NoPage from "./Pages/NoPage/NoPage";
 import AllProduct from "./Pages/AllProduct/AllProduct";
 import ProductInfo from "./Pages/ProductInfo/ProductInfo";
+import Mandi_Bhav from "./Pages/Mandi_Bhav/Mandi_Bhav";
+import Cart from "./Pages/Cart/Cart";
 
 function App() {
 

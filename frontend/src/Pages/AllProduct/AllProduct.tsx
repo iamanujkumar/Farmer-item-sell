@@ -2,12 +2,27 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import FilterSection from '../../components/Filter/Filter';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, deleteFromCart } from '../../redux/CartSlice';
 
 const AllProduct = () => {
-  const navigate=useNavigate();
   const [product, setProduct] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({});
+
+  const navigate=useNavigate();
+
+  const cartItems=useSelector((state)=>state.cart);
+  const dispatch=useDispatch();
+
+  const addCart = (item) => {
+    // console.log(item)
+    dispatch(addToCart(item));
+  }
+
+  const deleteCart = (item) => {
+    dispatch(deleteFromCart(item));
+  }
 
   const getAllProduct = async () => {
     try {
@@ -19,6 +34,10 @@ const AllProduct = () => {
       console.error('Error fetching products:', error);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   useEffect(() => {
     getAllProduct();
@@ -115,9 +134,14 @@ const AllProduct = () => {
                 <h3 className="text-xl font-semibold text-green-800 text-center">{itemName}</h3>
                 <p className="text-green-700 mt-2">₹{price}/kg</p>
                 <div className="mt-2">{renderStars(rating)}</div>
-                <button className="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
+                {cartItems.some((p)=> p._id === item._id)?
+                <button onClick={() => deleteCart(item)}
+                className="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
+                  Delete from Cart
+                </button>:<button onClick={() => addCart(item)}
+                className="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
                   Add to Cart
-                </button>
+                </button>}
               </div>
             </div>
           );

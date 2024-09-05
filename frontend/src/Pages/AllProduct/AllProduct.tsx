@@ -1,49 +1,78 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import FilterSection from '../../components/Filter/Filter';
+import { useNavigate } from 'react-router-dom';
 
-const AllProduct: React.FC =() => {
+const AllProduct = () => {
+  const navigate=useNavigate();
+  const [product, setProduct] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filters, setFilters] = useState({});
 
-  interface ItemType{
-    _id: string;
-    userId: string;
-    itemName: string;
-    description: string;
-    number: string;
-    category: string;
-    quantity: number;
-    city: string;
-    state: string;
-    price: number;
-    imagesUrl: string[];
-    rating: number;
-    lastUpdated: Date;
-};
-  const [product,setProduct]=useState<ItemType[]>({});
-  const getAllProduct=async()=>{
+  const getAllProduct = async () => {
     try {
-      const products=await axios.get<ItemType[]>(`http://localhost:8000/api/searchItems/search/?*`);   
-      setProduct(products.data);
-      console.log(product);
-      console.log(products.data);
+      const response = await axios.get('http://localhost:8000/api/searchItems/search/?*');
+      setProduct(response.data.data); // Accessing the nested `data` field
+      setFilteredProducts(response.data.data); // Initially, show all products
+      console.log(response.data.data);
     } catch (error) {
-      
+      console.error('Error fetching products:', error);
     }
-  }
-  const products = [
-    { id: 1, name: 'Fresh Tomatoes', price: 3.99, image: 'https://example.com/tomatoes.jpg', rating: 4.5 },
-    { id: 2, name: 'Organic Carrots', price: 2.49, image: 'https://example.com/carrots.jpg', rating: 3 },
-    { id: 3, name: 'Crisp Apples', price: 1.99, image: 'https://example.com/apples.jpg', rating: 5 },
-    { id: 4, name: 'Green Peppers', price: 4.29, image: 'https://example.com/peppers.jpg', rating: 2.5 },
-    { id: 5, name: 'Fresh Spinach', price: 3.50, image: 'https://example.com/spinach.jpg', rating: 4 },
-    { id: 6, name: 'Juicy Oranges', price: 5.49, image: 'https://example.com/oranges.jpg', rating: 3.5 },
-    // Add more products as needed
-  ];
-  useEffect(()=>{
-    getAllProduct();
+  };
 
-  },[]); 
-  // Helper function to render stars based on rating
-  const renderStars = (rating: number) => {
+  useEffect(() => {
+    getAllProduct();
+  }, []);
+
+  useEffect(() => {
+    applyFilters();
+  }, [filters, product]);
+
+  const applyFilters = () => {
+    let updatedProducts = [...product];
+
+    if (filters.selectedCategory) {
+      updatedProducts = updatedProducts.filter(
+        (item) => item.category === filters.selectedCategory
+      );
+    }
+
+    if (filters.priceRange) {
+      updatedProducts = updatedProducts.filter(
+        (item) => item.price >= filters.priceRange[0] && item.price <= filters.priceRange[1]
+      );
+    }
+
+    if (filters.location) {
+      updatedProducts = updatedProducts.filter(
+        (item) => item.location === filters.location
+      );
+    }
+
+    if (filters.sortOption) {
+      if (filters.sortOption.includes('Price')) {
+        updatedProducts.sort((a, b) => {
+          if (filters.sortOption.includes('Low to High')) {
+            return a.price - b.price;
+          } else {
+            return b.price - a.price;
+          }
+        });
+      } else if (filters.sortOption.includes('Rating')) {
+        updatedProducts.sort((a, b) => {
+          if (filters.sortOption.includes('High to Low')) {
+            return b.rating - a.rating;
+          } else {
+            return a.rating - b.rating;
+          }
+        });
+      }
+    }
+
+    setFilteredProducts(updatedProducts);
+  };
+
+  const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 !== 0;
     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
@@ -66,28 +95,33 @@ const AllProduct: React.FC =() => {
   };
 
   return (
-    <div className="bg-green-100 min-h-[70vh] p-6 flex justify-center items-center">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full h-full overflow-y-auto p-4">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="bg-white/30 backdrop-blur-lg rounded-lg shadow-lg p-4 hover:bg-white/40 hover:backdrop-blur-xl transition-all flex flex-col justify-between"
-          >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-32 md:h-40 lg:h-48 object-cover rounded-md"
-            />
-            <div className="mt-4 flex flex-col items-center">
-              <h3 className="text-xl font-semibold text-green-800 text-center">{product.name}</h3>
-              <p className="text-green-700 mt-2">${product.price.toFixed(2)}</p>
-              <div className="mt-2">{renderStars(product.rating)}</div>
-              <button className="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
-                Add to Cart
-              </button>
+    <div className="bg-green-100 min-h-screen p-6 flex flex-col md:flex-row">
+      <FilterSection onFilterChange={setFilters} p={product} sp={setProduct} />
+      <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full h-full overflow-y-auto p-4">
+        {filteredProducts.map((item, index) => {
+          const { _id, imagesUrl, itemName, price, rating } = item;
+          return (
+            <div
+              key={index}
+              className="bg-white/30 backdrop-blur-lg rounded-lg shadow-lg p-4 hover:bg-white/40 hover:backdrop-blur-xl transition-all flex flex-col justify-between"
+            >
+              <img
+                src={imagesUrl[0]}
+                alt={itemName}
+                onClick={()=>navigate(`/productinfo/${_id}`)}
+                className="w-full h-32 md:h-40 lg:h-48 object-cover rounded-md"
+              />
+              <div className="mt-4 flex flex-col items-center">
+                <h3 className="text-xl font-semibold text-green-800 text-center">{itemName}</h3>
+                <p className="text-green-700 mt-2">₹{price}/kg</p>
+                <div className="mt-2">{renderStars(rating)}</div>
+                <button className="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
+                  Add to Cart
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

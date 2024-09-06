@@ -1,0 +1,162 @@
+[
+    {
+      "id": 1,
+      "title": "Fresh Tomatoes",
+      "price": "₹70.00",
+      "description": "Organic tomatoes freshly harvested from local farms.",
+      "image": "https://media.post.rvohealth.io/wp-content/uploads/2020/09/AN313-Tomatoes-732x549-Thumb-732x549.jpg",
+      "rating": 4.5
+    },
+    {
+      "id": 2,
+      "title": "Green Bell Peppers",
+      "price": "₹55.00",
+      "description": "Crisp and fresh green bell peppers.",
+      "image": "https://greenhousetogarden.ca/wp-content/uploads/2024/01/Bell-Peppers-Green.png",
+      "rating": 4.0
+    },
+    {
+      "id": 3,
+      "title": "Carrots",
+      "price": "₹80.00",
+      "description": "Crunchy and sweet organic carrots.",
+      "image": "https://img.taste.com.au/PrC6ePLZ/taste/2007/03/carrots-181856-2.jpg",
+      "rating": 4.7
+    },
+    {
+      "id": 4,
+      "title": "Fresh Lettuce",
+      "price": "₹35.00",
+      "description": "Crisp and refreshing lettuce leaves.",
+      "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/03/23/FN_stock-art-getty-romaine-lettuce_s6x4.jpg.rend.hgtvcom.616.411.suffix/1584990138440.jpeg",
+      "rating": 4.3
+    },
+    {
+      "id": 5,
+      "title": "Potatoes",
+      "price": "₹40.00",
+      "description": "Freshly harvested organic potatoes.",
+      "image": "https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2014/01/potatoes-411975_1280.jpg",
+      "rating": 4.2
+    },
+    {
+      "id": 6,
+      "title": "Red Onions",
+      "price": "₹45.00",
+      "description": "Flavorful and pungent organic red onions.",
+      "image": "https://www.tastingtable.com/img/gallery/why-are-red-onions-purple/l-intro-1644158494.jpg",
+      "rating": 3.1
+    },
+    {
+      "id": 7,
+      "title": "Cucumbers",
+      "price": "₹50.00",
+      "description": "Cool and crisp cucumbers, perfect for salads.",
+      "image": "https://www.finedininglovers.com/sites/g/files/xknfdk626/files/styles/article_1200_800_fallback/public/2022-06/Type%20of%20cucumber.jpg?itok=RpCJGIEd",
+      "rating": 3.4
+    },
+    {
+      "id": 8,
+      "title": "Broccoli",
+      "price": "₹75.00",
+      "description": "Nutritious and fresh organic broccoli.",
+      "image": "https://www.health.com/thmb/kSuBATf0vDnmAOj3feuHHA3ztBY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Health-Stocksy_txp48915e00jrw300_Medium_5965806-1b7dc08bfcbc4b748e5f1f27f67894a5.jpg",
+      "rating": 3.6
+    },
+    {
+      "id": 9,
+      "title": "Cauliflower",
+      "price": "₹70.00",
+      "description": "Fresh cauliflower with a crisp texture.",
+      "image": "https://cdn.britannica.com/24/140624-050-A8237BB9/Cauliflower-plant-form-cauliflower-cabbage-flower-structures.jpg",
+      "rating": 4.2
+    },
+    {
+      "id": 10,
+      "title": "Zucchini",
+      "price": "₹55.00",
+      "description": "Tender and flavorful organic zucchini.",
+      "image": "https://www.allrecipes.com/thmb/xkybcCdsXKxe46LB9v4e4AV28oo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-zucchini-basket-4x3-e6aba860035443a1b0a885d2d941ef6a.jpg",
+      "rating": 3.3
+    },
+    {
+      "id": 11,
+      "title": "Pumpkin",
+      "price": "₹80.00",
+      "description": "Large and ripe pumpkins, perfect for soups.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/5c/FrenchMarketPumpkinsB.jpg",
+      "rating": 3.0
+    },
+    {
+      "id": 12,
+      "title": "Sweet Corn",
+      "price": "₹35.00",
+      "description": "Freshly harvested sweet corn cobs.",
+      "image": "https://hub.suttons.co.uk/wp-content/uploads/2023/04/group-of-sweetcorn-with-husks.jpg",
+      "rating": 4.5
+    },
+    {
+      "id": 13,
+      "title": "Eggplant",
+      "price": "₹60.00",
+      "description": "Purple and glossy eggplants, rich in flavor.",
+      "image": "https://i.ytimg.com/vi/Ppi1fNKhhTk/maxresdefault.jpg",
+      "rating": 4.2
+    },
+    {
+      "id": 14,
+      "title": "Spinach",
+      "price": "₹45.00",
+      "description": "Fresh and leafy organic spinach.",
+      "image": "https://www.trustbasket.com/cdn/shop/articles/Spinach.webp?v=1686909241",
+      "rating": 4.6
+    },
+    {
+      "id": 15,
+      "title": "Beetroots",
+      "price": "₹55.00",
+      "description": "Sweet and earthy organic beetroots.",
+      "image": "https://green-connect.com.au/wp-content/uploads/2021/11/20211117-beetroot-500x357.jpg",
+      "rating": 4.3
+    },
+    {
+      "id": 16,
+      "title": "Garlic",
+      "price": "₹30.00",
+      "description": "Fresh and aromatic organic garlic bulbs.",
+      "image": "https://ogden_images.s3.amazonaws.com/www.iamcountryside.com/images/sites/1/2021/09/19114817/AdobeStock_364056397-scaled-e1662410682321.jpeg",
+      "rating": 4.5
+    },
+    {
+      "id": 17,
+      "title": "Ginger",
+      "price": "₹70.00",
+      "description": "Fresh and spicy organic ginger root.",
+      "image": "https://media.post.rvohealth.io/wp-content/uploads/2023/09/ginger-root-still-life-1296x728-header.jpg",
+      "rating": 4.4
+    },
+    {
+      "id": 18,
+      "title": "Cabbage",
+      "price": "₹40.00",
+      "description": "Crisp and fresh green cabbage heads.",
+      "image": "https://assets.clevelandclinic.org/transform/871f96ae-a852-4801-8675-683191ce372d/Benefits-Of-Cabbage-589153824-770x533-1_jpg",
+      "rating": 4.3
+    },
+    {
+      "id": 19,
+      "title": "Peas",
+      "price": "₹50.00",
+      "description": "Sweet and tender organic peas.",
+      "image": "https://www.bpmcdn.com/f/files/chilliwack/import/2017-04/21731chilliwackPeas.jpg;w=725",
+      "rating": 4.5
+    },
+    {
+      "id": 20,
+      "title": "Radishes",
+      "price": "₹60.00",
+      "description": "Crisp and spicy organic radishes.",
+      "image": "https://images.thequint.com/thequint%2F2023-12%2F92e21cee-69c3-4ade-85ed-7802e43eab58%2Fdaikon_radishes_isolated_on_white_background_jpg_s_1024x1024_w_is_k_20_c_15O2HwEMrcJN7tW1WaKgH3NaPvJ.jpg",
+      "rating": 4.1
+    }
+  ]

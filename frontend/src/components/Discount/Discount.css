@@ -1,0 +1,130 @@
+.DiscountSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem 2% 10rem;
+    position: relative;
+    gap: 3rem;
+}
+
+.DiscountSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background: url("../../assets/harvesting-bg.jpg");
+    z-index: -2;
+
+}
+
+.DiscountSection::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+        z-index: -2;
+    opacity: .65;
+
+}
+
+.DiscountSection .img {
+    max-height: 7rem;
+    max-width: 7rem;
+    overflow-y: hidden;
+
+}
+
+.DiscountSection .img img {
+    width: 100%;
+    height: 100%;
+}
+
+.DiscountSection .textinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #fff;
+    width: 100%; 
+    text-align: center; 
+}
+
+.DiscountSection .textinfo h2 {
+    font-size: 2.2em;
+    font-family: var(--font-02);
+    margin: 0; 
+}
+
+
+
+.DiscountSection a {
+    padding: 17px 30px;
+    border-radius: 7px;
+    text-decoration: none;
+    border: 1px solid black;
+    background-color: transparent;
+    color: black;
+    transition: all .4s ease;
+    text-align: center;
+}
+
+.DiscountSection a:hover {
+    background-color: gray;
+    color: yellow;
+    border: 1px solid gray;
+}
+
+
+
+
+.transformBox {
+    max-width: 1100px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    position: relative;
+    color: #fff;
+    border-radius: 10px;
+    transform: translateY(-200px);
+    margin-bottom: 0;
+}
+
+.transformBox .cardsContainer {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.transformBox .card {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: .5rem;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transformBox .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.transformBox .card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    
+}
+
+
+

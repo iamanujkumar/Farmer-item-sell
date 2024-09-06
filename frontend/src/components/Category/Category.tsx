@@ -6,6 +6,7 @@ import {
   FaBoxOpen, FaTools, FaLeaf, FaSprayCan, FaSun, FaTimes
 } from 'react-icons/fa';
 import AllProduct from '../../Pages/AllProduct/AllProduct';
+import TripleCard from '../TripleCard/TripleCard';
 
 function Category() {
   const [expandedCategory, setExpandedCategory] = useState(null);
@@ -211,7 +212,7 @@ function Category() {
             <p className="text-gray-500">Select a category and item to see details.</p>
           )}
         </div>
-      </div>):("")}
+      </div>):(<TripleCard/>)}
       
     </div>
   );

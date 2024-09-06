@@ -1,0 +1,50 @@
+.video-section {
+    position: relative;
+    padding: 60px 0; /* Adds space around the video */
+    background-color: #f8f9fa; /* Light background color */
+}
+
+.video-section .container {
+    max-width: 1200px; /* Max width for the container */
+    margin: 0 auto; /* Center the container */
+    text-align: center; /* Center text and video */
+}
+
+.video-section .video-content {
+    position: relative;
+    display: inline-block; /* Keeps the video centered */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.video-section .video-btn {
+    display: inline-flex; /* Flex for alignment */
+    justify-content: center;
+    align-items: center;
+    width: 80px; /* Button size */
+    height: 80px;
+    border-radius: 50%; /* Circular button */
+    background-color: var(--bs-blue); /* Primary color */
+    color: #fff; /* Button icon color */
+    font-size: 24px; /* Icon size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.video-section .video-btn:hover {
+    background-color: var(--bs-dark); /* Darker shade on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .video-section {
+        padding: 30px 0; /* Less padding on smaller screens */
+    }
+
+    .video-section .video-btn {
+        width: 60px; /* Smaller button size */
+        height: 60px;
+        font-size: 20px; /* Smaller icon size */
+    }
+}

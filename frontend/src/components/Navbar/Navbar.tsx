@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from "../../contexts/AppContext";
 import SignOutButton from "../SignOutButton";
 import { FaUserCircle,FaShoppingCart } from "react-icons/fa";
-=======
-import { FaUserCircle } from "react-icons/fa";
 import img from '../../assets/logo-two.png'
 
 const Navbar = () => {

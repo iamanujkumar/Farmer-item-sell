@@ -1,3 +1,4 @@
+
 // import BusinessComponent from "../components/BusinessComponent/BusinessComponent"
 import Header from "../components/Header"
 import Footer from "../Pages/Footer/Footer"

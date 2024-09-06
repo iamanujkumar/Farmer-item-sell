@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../../contexts/AppContext';
-
+import { useNavigate } from 'react-router-dom';
 const Profile: React.FC = () => {
     const { user, updateUser } = useAppContext();
     const [name, setName] = useState(user?.firstName || '');
     const [bio, setBio] = useState(user?.bio || '');
     const [profilePic, setProfilePic] = useState(user?.profilePic || '');
     const [location, setLocation] = useState(user?.location || '');
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         if (user) {
@@ -19,6 +20,9 @@ const Profile: React.FC = () => {
 
     const handleUpdateProfile = async () => {
         await updateUser({ firstName: name, bio, profilePic, location });
+    };
+    const handleAddProducts = () => {
+        navigate('/add-item');  
     };
 
     return (
@@ -73,6 +77,13 @@ const Profile: React.FC = () => {
                         className="bg-green-600 text-white font-bold py-2 px-4 rounded-md hover:bg-green-700"
                     >
                         Update Profile
+                    </button>
+
+                    <button
+                        onClick={handleAddProducts}  
+                        className="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 mt-4"
+                    >
+                        Add Products
                     </button>
                 </div>
             </div>

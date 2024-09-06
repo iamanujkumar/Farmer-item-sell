@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart, deleteFromCart } from '../../redux/CartSlice';
+import ShareButton from '../../components/Share/Share';
 
 const ProductInfo = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [selectedImage, setSelectedImage] = useState(null); // State for selected image
   const { id } = useParams();
 
@@ -29,8 +30,10 @@ const ProductInfo = () => {
       setProduct(response.data);
       setSelectedImage(response.data.imagesUrl[0]); // Default to first image
     } catch (error) {
+      setLoading(false);
+      setError('Error fetching product details.'); // Display a user-friendly error message
       console.error('Error fetching products:', error);
-      setError('Error fetching product details');
+      // setError('Error fetching product details');
     }
   };
 
@@ -148,6 +151,35 @@ const ProductInfo = () => {
   </div>
 </div>
 
+            {/* Buttons */}
+            <div className="flex space-x-4">
+              {cartItems.some((p) => p._id === product._id) ? (
+                <button
+                  onClick={() => deleteCart(product)}
+                  className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
+                >
+                  Delete from Cart
+                </button>
+              ) : (
+                <button
+                  onClick={() => addCart(product)}
+                  className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
+                >
+                  Add to Cart
+                </button>
+              )}
+              <button className="bg-green-800 text-white py-2 px-4 rounded hover:bg-green-900 transition-all">
+                Buy Now
+              </button>
+              
+              {/* Share Button */}
+              <ShareButton 
+                title={`Check out this item: ${product.itemName}`} 
+                text={`I found this item on our e-commerce platform: ${product.itemName}. It costs ₹${product.price}/kg.`} 
+                url={window.location.href} 
+              />
+            </div>
+          </div>
         </div>
       </div>
     )

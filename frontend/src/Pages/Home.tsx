@@ -1,15 +1,22 @@
 import Chatbot from "../components/ChatBot/Chatbot"
-import cover from '../assets/banner.jpg'
 import Category from "../components/Category/Category"
+import HeroSection from "./Hero/HeroSection"
+import SummarySection from "../components/Summery/SummarySection"
+import BusinessComponent from "../components/BusinessComponent/BusinessComponent"
+import RecommendationProducts from "../components/Recomendation/recommendedProduct"
+import Discount from "../components/Discount/Discount"
 
 const Home = () => {
   return (
     <div>
       <Chatbot/>
-      <img src={cover} alt="" />
-      
+      {/* <img src={cover} alt="" /> */}
+      <HeroSection/>
       <Category/>
-      hii
+      <RecommendationProducts/>
+      <SummarySection/>
+     <BusinessComponent/>
+     <Discount/>
     </div>
   )
 }

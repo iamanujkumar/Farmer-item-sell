@@ -46,7 +46,7 @@ export const AppContextProvider = ({
         onSuccess: async () => {
             try {
                 const userData = await apiClient.fetchCurrentUser();
-                setUser(userData); // Ensure `userData` matches `User` type
+                setUser(userData); // Ensure userData matches User type
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
             }
@@ -59,7 +59,7 @@ export const AppContextProvider = ({
     const updateUser = async (data: Partial<User>) => {
         try {
             const updatedUser = await apiClient.updateUserProfile(data);
-            setUser(updatedUser); // Ensure `updatedUser` matches `User` type
+            setUser(updatedUser); // Ensure updatedUser matches User type
             showToast({ message: "Profile updated successfully", type: "SUCCESS" });
         } catch (error) {
             console.error("Failed to update user data:", error);

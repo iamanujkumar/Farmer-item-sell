@@ -10,26 +10,25 @@ const AllProduct = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({});
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const cartItems=useSelector((state)=>state.cart);
-  const dispatch=useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const addCart = (item) => {
-    // console.log(item)
     dispatch(addToCart(item));
-  }
+  };
 
   const deleteCart = (item) => {
     dispatch(deleteFromCart(item));
-  }
+  };
 
   const getAllProduct = async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/searchItems/search/?*');
-      console.log(response.data.data);
       setProduct(response.data.data); // Accessing the nested `data` field
       setFilteredProducts(response.data.data); // Initially, show all products
+      console.log(response.data.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -62,9 +61,9 @@ const AllProduct = () => {
       );
     }
 
-    if (filters.selectedCity) {
+    if (filters.location) {
       updatedProducts = updatedProducts.filter(
-        (item) => item.city === filters.selectedCity
+        (item) => item.location === filters.location
       );
     }
 
@@ -114,38 +113,50 @@ const AllProduct = () => {
   };
 
   return (
-    <div className="bg-green-100 min-h-screen p-6 flex flex-col md:flex-row">
-      <FilterSection onFilterChange={setFilters}  />
-      <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full h-full overflow-y-auto p-4">
-        {filteredProducts.map((item, index) => {
-          const { _id, imagesUrl, itemName, price, rating } = item;
-          return (
-            <div
-              key={index}
-              className="bg-white/30 backdrop-blur-lg rounded-lg shadow-lg p-4 hover:bg-white/40 hover:backdrop-blur-xl transition-all flex flex-col justify-between"
-            >
-              <img
-                src={imagesUrl[0]}
-                alt={itemName}
-                onClick={()=>navigate(`/productinfo/${_id}`)}
-                className="w-full h-32 md:h-40 lg:h-48 object-cover rounded-md"
-              />
-              <div className="mt-4 flex flex-col items-center">
-                <h3 className="text-xl font-semibold text-green-800 text-center">{itemName}</h3>
-                <p className="text-green-700 mt-2">₹{price}/kg</p>
-                <div className="mt-2">{renderStars(rating)}</div>
-                {cartItems.some((p)=> p._id === item._id)?
-                <button onClick={() => deleteCart(item)}
-                className="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
-                  Delete from Cart
-                </button>:<button onClick={() => addCart(item)}
-                className="mt-4 bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
-                  Add to Cart
-                </button>}
+    <div className="bg-green-100 min-h-screen flex flex-col md:flex-row">
+      <FilterSection onFilterChange={setFilters} p={product} sp={setProduct} />
+      <div className="flex-1 overflow-y-auto p-4 max-h-screen">
+        <div className="flex flex-wrap gap-4 justify-center items-center">
+          {filteredProducts.map((item, index) => {
+            const { _id, imagesUrl, itemName, price, rating } = item;
+            return (
+              <div key={index} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-56">
+                <div className="relative p-2.5 h-44 overflow-hidden rounded-xl bg-clip-border">
+                  <img
+                    src={imagesUrl[0]}
+                    alt={itemName}
+                    onClick={() => navigate(`/productinfo/${_id}`)}
+                    className="h-full w-full object-cover rounded-md"
+                  />
+                </div>
+                <div className="p-4">
+                  <div className="mb-2 flex items-center justify-between">
+                    <p className="text-slate-800 text-xl font-semibold">{itemName}</p>
+                    <p className="text-cyan-600 text-xl font-semibold">{price}</p>
+                  </div>
+                  <p className="block font-sans text-xl antialiased font-normal leading-normal text-gray-700">
+                    {renderStars(rating)}
+                  </p>
+                  {cartItems.some((p) => p._id === item._id) ? (
+                    <button
+                      onClick={() => deleteCart(item)}
+                      className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    >
+                      Delete from Cart
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => addCart(item)}
+                      className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

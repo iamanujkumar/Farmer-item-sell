@@ -28,6 +28,7 @@ function App() {
         <Route path="/cart" element={<Layout><Cart/></Layout>} />
         <Route path="/*" element={<NoPage/>}/>
         <Route path="/products" element={<Layout><AllProduct/></Layout>}/>
+        <Route path="/mandi-bhav" element={<Layout><Mandi_Bhav/></Layout>}/>
        
         {isLoggedIn && (
           <>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from "../../contexts/AppContext";
 import SignOutButton from "../SignOutButton";
 import { FaUserCircle } from "react-icons/fa";
+import SearchBar from '../Search/Search';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,16 +23,8 @@ const Navbar = () => {
 
         {/* Search Bar */}
         <div className="flex flex-grow max-w-md mx-4">
-          <input
-            type="text"
-            className="w-full p-2 rounded-l-md focus:outline-none"
-            placeholder="Search..."
-          />
-          <button className="bg-white text-green-200 p-2 rounded-r-md hover:bg-green-200 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm21-6h2M21 11h2M15 8.5A3.5 3.5 0 0118.5 5 3.5 3.5 0 0122 8.5 3.5 3.5 0 0118.5 12A3.5 3.5 0 0115 8.5z" />
-            </svg>
-          </button>
+          <SearchBar />
+           
         </div>
 
         {/* Desktop Links */}
@@ -39,7 +32,7 @@ const Navbar = () => {
           <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/">Home</Link></li>
           <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/aboutus">About Us</Link></li>
           <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/products">Products</Link></li>
-          <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/mandibhavs">Mandi Bhav</Link></li>
+          <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/mandi-bhav">Mandi Bhav</Link></li>
 
           {/* Show Profile Icon and SignOutButton if logged in */}
           {isLoggedIn ? (

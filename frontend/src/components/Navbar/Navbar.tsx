@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from "../../contexts/AppContext";
 import SignOutButton from "../SignOutButton";
+import { FaUserCircle,FaShoppingCart } from "react-icons/fa";
+=======
 import { FaUserCircle } from "react-icons/fa";
 import img from '../../assets/logo-two.png'
 
@@ -66,6 +68,11 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               <li className="text-white cursor-pointer">
+                <Link to="/add-cart" className="text-3xl hover:text-gray-300">
+                  <FaShoppingCart />
+                </Link>
+              </li>
+              <li className="text-white cursor-pointer">
                 <Link to="/profile" className="text-3xl hover:text-gray-300">
                   <FaUserCircle />
                 </Link>
@@ -105,6 +112,11 @@ const Navbar = () => {
           {/* Show Profile Icon and SignOutButton if logged in */}
           {isLoggedIn ? (
             <>
+            <li className="text-white cursor-pointer">
+                <Link to="/add-cart" className="text-3xl hover:text-gray-300">
+                  <FaShoppingCart />
+                </Link>
+              </li>
               <li className="block text-white py-2 px-4 hover:bg-green-500 cursor-pointer">
                 <Link to="/profile" className="text-3xl hover:text-gray-300">
                   <FaUserCircle />

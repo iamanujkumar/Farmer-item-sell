@@ -5,6 +5,8 @@ import {
   FaFish, FaCheese, FaTractor, FaWater, FaTree, FaOilCan, FaMugHot,
   FaBoxOpen, FaTools, FaLeaf, FaSprayCan, FaSun, FaTimes
 } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+=======
 import AllProduct from '../../Pages/AllProduct/AllProduct';
 import TripleCard from '../TripleCard/TripleCard';
 import AboutSection from '../AbousUs/AboutSection';
@@ -14,6 +16,7 @@ function Category() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [item, setItem] = useState("");
   const [items, setItems] = useState([]); // State to store fetched items
+ const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,10 +33,6 @@ function Category() {
       fetchData();
     }
   }, [item]);
-  useEffect(()=>{
-        console.log(items.data)
-  },[items])
- 
 
   const categories = {
     Vegetables: [
@@ -60,6 +59,36 @@ function Category() {
       { name: 'Turmeric', icon: <FaSun /> },
       { name: 'Others', icon: <FaBoxOpen /> },
     ],
+    Dairy: [
+      { name: 'Milk', icon: <FaCheese /> },
+      { name: 'Cheese', icon: <FaCheese /> },
+      { name: 'Butter', icon: <FaOilCan /> },
+      { name: 'Yogurt', icon: <FaMugHot /> },
+    ],
+    Beverages: [
+      { name: 'Coffee', icon: <FaMugHot /> },
+      { name: 'Tea', icon: <FaMugHot /> },
+      { name: 'Juices', icon: <FaWater /> },
+      { name: 'Soft Drinks', icon: <FaTint /> },
+    ],
+    Grains: [
+      { name: 'Rice', icon: <FaSeedling /> },
+      { name: 'Wheat', icon: <FaSeedling /> },
+      { name: 'Corn', icon: <FaLeaf /> },
+      { name: 'Barley', icon: <FaLeaf /> },
+    ],
+    Seeds: [
+      { name: 'Sunflower Seeds', icon: <FaSeedling /> },
+      { name: 'Pumpkin Seeds', icon: <FaSeedling /> },
+      { name: 'Chia Seeds', icon: <FaSeedling /> },
+      { name: 'Flax Seeds', icon: <FaSeedling /> },
+    ],
+    AgroMachinery: [
+      { name: 'Tractors', icon: <FaTractor /> },
+      { name: 'Plows', icon: <FaTools /> },
+      { name: 'Harvesters', icon: <FaTools /> },
+      { name: 'Seed Drills', icon: <FaTools /> },
+    ],
   };
 
   const toggleCategory = (category) => {
@@ -73,6 +102,7 @@ function Category() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 !== 0;
@@ -98,7 +128,7 @@ function Category() {
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Category Button */}
-      <div className="md:hidden p-4 z-50 ">
+      <div className="md:hidden p-4 z-50">
         <button
           onClick={toggleSidebar}
           className="text-white bg-green-800 px-4 py-2 rounded focus:outline-none"
@@ -141,6 +171,11 @@ function Category() {
                       {category === 'Fruits' && '🍎'}
                       {category === 'Dals' && '🍛'}
                       {category === 'Spices' && '🌶'}
+                      {category === 'Dairy' && '🧀'}
+                      {category === 'Beverages' && '☕'}
+                      {category === 'Grains' && '🌾'}
+                      {category === 'Seeds' && '🌱'}
+                      {category === 'AgroMachinery' && '🚜'}
                     </span>
                   </div>
                   <h3 className="text-lg font-medium text-green-700">{category}</h3>
@@ -167,52 +202,52 @@ function Category() {
       </div>
 
       {/* Rest of the Screen */}
-      { items?.data?.length >0 ?(<div
-        className={`flex-grow p-4 transition-colors overflow-auto duration-300 ease-in-out ${
-          isSidebarOpen ? 'bg-gray-50' : 'bg-white'
-        }`}
-        style={{ padding: 0 }}
-      >
-        <div className="flex flex-wrap gap-4 justify-center  items-center p-4">
-          {items?.data?.length > 0 ? (
-            items?.data?.map((item, index) => (
-              // <div key={index} className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow w-64">
-              //   <h3 className="text-xl font-bold mb-2">{item.itemName}</h3>
-              //   <p className="text-gray-600 mb-4">{item.description}</p>
-              //   <p className="text-green-800 font-semibold">Price: {item.price}</p>
-              // </div>
-              <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-56">
-              <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-44">
-                <img
-                  src={item.imagesUrl[0]}
-                  alt="card-image" className="object-cover w-full h-full" />
-              </div>
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                   {item.itemName}
-                  </p>
-                  <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                   {item.price}/Kg
+      {items?.data?.length > 0 ? (
+        <div
+          className={`flex-grow p-4 transition-colors overflow-auto duration-300 ease-in-out ${
+            isSidebarOpen ? 'bg-gray-50' : 'bg-white'
+          }`}
+          style={{ padding: 0 }}
+        >
+          <div className="flex flex-wrap gap-4 justify-center items-center p-4">
+            {items?.data?.map((item, index) => (
+              <div key={index} className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-56">
+                <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-44">
+                  <img
+                    src={item.imagesUrl[0]}
+                    
+                    alt="card-image" className="object-cover w-full h-full" />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+                      {item.itemName}
+                    </p>
+                    <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+                      {item.price}/Kg
+                    </p>
+                  </div>
+                  <p className="block font-sans text-xl antialiased font-normal leading-normal text-gray-700">
+                    {renderStars(item.rating)}
                   </p>
                 </div>
-                <p className="block font-sans text-xl antialiased font-normal leading-normal text-gray-700 ">
-              {renderStars(item.rating)}
-              </p>
+                <div className="p-6 pt-0">
+                  <button
+                  onClick={()=>navigate(`/productinfo/${item._id}`)}
+                    className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    type="button">
+                    View
+                  </button>
+                </div>
               </div>
-              <div className="p-6 pt-0">
-                <button
-                  className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-                  type="button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-            ))
-          ) : (
-            <p className="text-gray-500">Select a category and item to see details.</p>
-          )}
+            ))}
+          </div>
         </div>
+      ) : (
+        <div className="flex-grow p-4">
+          <p className="text-gray-500">Select a category and item to see details.</p>
+        </div>
+      )}
       </div>):(<AboutSection/>)}
       
     </div>

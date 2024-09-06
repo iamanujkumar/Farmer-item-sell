@@ -65,7 +65,7 @@ const ManageItemForm = ({ onSave, isLoading, item }: Props) => {
         <FormProvider {...formMethods}>
             <form className="flex flex-col gap-10" onSubmit={onSubmit}>
                 <DetailsSection />
-                <ImagesSection />
+                {/* <ImagesSection /> */}
                 <span className="flex justify-end">
                     <button 
                         disabled={isLoading}

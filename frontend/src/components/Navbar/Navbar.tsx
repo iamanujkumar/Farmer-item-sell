@@ -24,9 +24,12 @@ const Navbar = () => {
         {/* Search Bar */}
         <div className="flex flex-grow max-w-md mx-4">
           <SearchBar />
-           
+          <button className="bg-white text-green-200 p-2 rounded-r-md hover:bg-green-200 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm21-6h2M21 11h2M15 8.5A3.5 3.5 0 0118.5 5 3.5 3.5 0 0122 8.5 3.5 3.5 0 0118.5 12A3.5 3.5 0 0115 8.5z" />
+            </svg>
+          </button>   
         </div>
-
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-4 items-center">
           <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/">Home</Link></li>

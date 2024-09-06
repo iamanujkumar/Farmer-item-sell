@@ -27,9 +27,9 @@ const AllProduct = () => {
   const getAllProduct = async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/searchItems/search/?*');
+      console.log(response.data.data);
       setProduct(response.data.data); // Accessing the nested `data` field
       setFilteredProducts(response.data.data); // Initially, show all products
-      console.log(response.data.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -62,9 +62,9 @@ const AllProduct = () => {
       );
     }
 
-    if (filters.location) {
+    if (filters.selectedCity) {
       updatedProducts = updatedProducts.filter(
-        (item) => item.location === filters.location
+        (item) => item.city === filters.selectedCity
       );
     }
 

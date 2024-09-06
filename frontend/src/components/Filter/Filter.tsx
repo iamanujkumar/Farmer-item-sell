@@ -3,29 +3,16 @@ import { useEffect, useState } from "react";
 const FilterSection = ({ onFilterChange }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [priceRange, setPriceRange] = useState([0, 1000]);
-  const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [sortOption, setSortOption] = useState('');
 
   const categories = ['Vegetables', 'Fruits', 'Spices', 'Dairy', 'Grains'];
-  const states = ['Maharashtra', 'Delhi', 'Tamil Nadu', 'West Bengal', 'Karnataka'];
-
-  const citiesByState = {
-    Maharashtra: ['Mumbai', 'Pune', 'Nagpur'],
-    Delhi: ['New Delhi'],
-    'Tamil Nadu': ['Chennai', 'Coimbatore'],
-    'West Bengal': ['Kolkata', 'Howrah'],
-    Karnataka: ['Bangalore', 'Mysore'],
-  };
+  
+  const cities = ['gorakhpur','Mumbai', 'Pune', 'Nagpur', 'New Delhi', 'Chennai', 'Coimbatore', 'Kolkata', 'Howrah', 'Bangalore', 'Mysore'];
 
   useEffect(() => {
-    onFilterChange({ selectedCategory, priceRange, selectedState, selectedCity, sortOption });
-  }, [selectedCategory, priceRange, selectedState, selectedCity, sortOption]);
-
-  // Update city when the state changes
-  useEffect(() => {
-    setSelectedCity('');
-  }, [selectedState]);
+    onFilterChange({ selectedCategory, priceRange, selectedCity, sortOption });
+  }, [selectedCategory, priceRange, selectedCity, sortOption]);
 
   return (
     <div className="bg-white p-4 md:w-64 w-full md:h-screen shadow-md flex flex-col md:flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -70,41 +57,22 @@ const FilterSection = ({ onFilterChange }) => {
         </div>
       </div>
 
-      {/* State Filter */}
+      {/* City Filter */}
       <div className="mb-6 sm:mb-0">
-        <h3 className="font-medium text-gray-800 mb-2">State</h3>
+        <h3 className="font-medium text-gray-800 mb-2">City</h3>
         <select
           className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          value={selectedState}
-          onChange={(e) => setSelectedState(e.target.value)}
+          value={selectedCity}
+          onChange={(e) => setSelectedCity(e.target.value)}
         >
-          <option value="">All States</option>
-          {states.map((state) => (
-            <option key={state} value={state}>
-              {state}
+          <option value="">All Cities</option>
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
             </option>
           ))}
         </select>
       </div>
-
-      {/* City Filter */}
-      {selectedState && (
-        <div className="mb-6 sm:mb-0">
-          <h3 className="font-medium text-gray-800 mb-2">City</h3>
-          <select
-            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-          >
-            <option value="">All Cities</option>
-            {citiesByState[selectedState].map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
 
       {/* Sorting Options */}
       <div className="mb-6 sm:mb-0">

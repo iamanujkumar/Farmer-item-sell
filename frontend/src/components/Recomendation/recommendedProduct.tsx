@@ -7,13 +7,14 @@ interface Product {
   title: string;
   price: string;
   description: string;
-  image: string;
-  rating: number; 
+  imagesUrl: string[]; // Adjusted to match the API response
+  rating: number;
 }
 
 const RecommendationProducts: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const navigate=useNavigate();
+  const [visibleCount, setVisibleCount] = useState<number>(8);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -57,17 +58,21 @@ const RecommendationProducts: React.FC = () => {
     );
   };
 
+  const showMoreProducts = () => {
+    setVisibleCount(visibleCount + 4); // Increase the number of visible products by 4
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-bold text-slate-800 mb-6">Recommended Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map(product => (
+        {products.slice(0, visibleCount).map(product => (
           <div key={product._id} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-66">
             <div className="relative p-2.5 overflow-hidden rounded-xl bg-clip-border" style={{ height: '200px', width: '350px' }}>
               <img
                 src={product.imagesUrl[0]}
                 alt={product.title}
-                onClick={()=>navigate(`/productinfo/${product._id}`)}
+                onClick={() => navigate(`/productinfo/${product._id}`)}
                 className="object-cover w-full h-full rounded-md"
               />
             </div>
@@ -77,7 +82,7 @@ const RecommendationProducts: React.FC = () => {
                   {product.title}
                 </p>
                 <p className="text-cyan-600 text-xl font-semibold">
-                 Rs - {product.price}
+                  Rs - {product.price}
                 </p>
               </div>
               <div className="block font-sans text-xl antialiased font-normal leading-normal text-gray-700">
@@ -86,10 +91,21 @@ const RecommendationProducts: React.FC = () => {
               <button className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
                 View More
               </button>
+              
             </div>
           </div>
         ))}
       </div>
+      {visibleCount < products.length && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={showMoreProducts}
+            className="bg-cyan-600 text-white px-4 py-2 rounded-md transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700"
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </div>
   );
 };

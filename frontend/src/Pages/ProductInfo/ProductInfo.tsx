@@ -90,6 +90,7 @@ const ProductInfo = () => {
                 alt={product.itemName}
                 className="w-full h-[80%] object-cover rounded-md" // Adjust height to fit small images
               />
+              
             </div>
 
             {/* Small Images (Thumbnails) */}
@@ -110,42 +111,43 @@ const ProductInfo = () => {
           {/* Product Details */}
           <div className="w-full md:w-1/2 flex flex-col justify-between">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-green-800 mb-2">{product.itemName}</h1>
-              <p className="text-xl text-green-700 mb-2">₹{product.price}/kg</p>
-              <div className="mb-4">{renderStars(product.rating)}</div>
-              <p className="text-gray-700 mb-4">{product.description}</p>
-            </div>
+    <h1 className="text-2xl md:text-3xl font-bold text-green-800 mb-2">{product.itemName}</h1>
+    <p className="text-xl text-green-700 mb-2">₹{product.price}/kg</p>
+    <div className="mb-4">{renderStars(product.rating)}</div>
+    <p className="text-gray-700 mb-4">{product.description}</p>
+  </div>
 
-            {/* Location */}
-            <div className="mb-4">
-              <h3 className="font-medium text-gray-800">Location:</h3>
-              <p className="text-gray-600">
-                {product.city}, {product.state}
-              </p>
-            </div>
+  {/* Location */}
+  <div className="mb-4">
+    <h3 className="font-medium text-gray-800">Location:</h3>
+    <p className="text-gray-600">
+      {product.city}, {product.state}
+    </p>
+  </div>
 
-            {/* Buttons */}
-            <div className="flex space-x-4">
-              {cartItems.some((p) => p._id === product._id) ? (
-                <button
-                  onClick={() => deleteCart(product)}
-                  className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
-                >
-                  Delete from Cart
-                </button>
-              ) : (
-                <button
-                  onClick={() => addCart(product)}
-                  className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
-                >
-                  Add to Cart
-                </button>
-              )}
-              <button className="bg-green-800 text-white py-2 px-4 rounded hover:bg-green-900 transition-all">
-                Buy Now
-              </button>
-            </div>
-          </div>
+  {/* Buttons */}
+  <div className="flex space-x-4">
+    {cartItems.some((p) => p._id === product._id) ? (
+      <button
+        onClick={() => deleteCart(product)}
+        className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
+      >
+        Delete from Cart
+      </button>
+    ) : (
+      <button
+        onClick={() => addCart(product)}
+        className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
+      >
+        Add to Cart
+      </button>
+    )}
+    <button className="bg-green-800 text-white py-2 px-4 rounded hover:bg-green-900 transition-all">
+      Buy Now
+    </button>
+  </div>
+</div>
+
         </div>
       </div>
     )

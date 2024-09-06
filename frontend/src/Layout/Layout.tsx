@@ -1,4 +1,6 @@
+// import BusinessComponent from "../components/BusinessComponent/BusinessComponent"
 import Header from "../components/Header"
+import Footer from "../Pages/Footer/Footer"
 interface Props {
     children:React.ReactNode
 }
@@ -11,6 +13,8 @@ const Layout = ({children}:Props)=>{
                 <SearchBar/>
             </div> */}
             <div className="container mx-auto flex-1">{children}</div>
+            
+            <Footer/>
         </div>
     )  
 }

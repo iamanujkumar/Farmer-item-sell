@@ -28,7 +28,7 @@ router.get("/search", async (req: Request, res: Response) => {
         }
 
         // Pagination setup
-        const pageSize = 5; // Number of items per page
+        const pageSize = 20; // Number of items per page
         const pageNumber = parseInt(req.query.page ? req.query.page.toString() : "1");
         const skip = (pageNumber - 1) * pageSize;
 

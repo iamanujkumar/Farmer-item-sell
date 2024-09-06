@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from "../../contexts/AppContext";
 import SignOutButton from "../SignOutButton";
 import { FaUserCircle } from "react-icons/fa";
+import img from '../../assets/logo-two.png'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,21 +14,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-green-500 via-green-600 to-green-700 p-4">
+    <nav className="bg-gradient-to-r from-white-500 via-slate-200 to-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Brand Name */}
         <div className="text-white text-2xl font-bold">
-          <Link to="/">Farmers</Link>
+          
+          <Link to="/"><img src={img} alt="" /></Link>
         </div>
 
         {/* Search Bar */}
         <div className="flex flex-grow max-w-md mx-4">
-          <input
-            type="text"
-            className="w-full p-2 rounded-l-md focus:outline-none"
-            placeholder="Search..."
-          />
-          <button className="bg-white text-green-200 p-2 rounded-r-md hover:bg-green-200 focus:outline-none">
+        <input
+    type="text"
+    className="w-full p-2 rounded-l-md border-2 border-green-400 focus:outline-none focus:border-green-500 shadow-md"
+    placeholder="Search..."
+  />
+          <button className=" text-green-400 p-2 rounded-r-md hover:bg-green-400 hover:text-white focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16zm21-6h2M21 11h2M15 8.5A3.5 3.5 0 0118.5 5 3.5 3.5 0 0122 8.5 3.5 3.5 0 0118.5 12A3.5 3.5 0 0115 8.5z" />
             </svg>
@@ -36,11 +38,30 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-4 items-center">
-          <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/">Home</Link></li>
-          <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/aboutus">About Us</Link></li>
-          <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/products">Products</Link></li>
-          <li className="text-white hover:text-green-200 cursor-pointer"><Link to="/mandibhavs">Mandi Bhav</Link></li>
-
+        <li className="text-slate-800 hover:underline font-medium font-sans cursor-pointer hover:text-green-600 transition duration-300 ease-in-out">
+    <Link to="/" className="relative group">
+      Home
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-green-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+    </Link>
+  </li>
+  <li className="text-slate-800 hover:underline font-medium font-sans cursor-pointer hover:text-green-600 transition duration-300 ease-in-out">
+    <Link to="/aboutus" className="relative group">
+      About Us
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-green-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+    </Link>
+  </li>
+  <li className="text-slate-800 hover:underline font-medium font-sans cursor-pointer hover:text-green-600 transition duration-300 ease-in-out">
+    <Link to="/products" className="relative group">
+      Products
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-green-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+    </Link>
+  </li>
+  <li className="text-slate-800 hover:underline font-medium font-sans cursor-pointer hover:text-green-600 transition duration-300 ease-in-out">
+    <Link to="/mandibhavs" className="relative group">
+      Mandi Bhav
+      <span className="absolute left-0 bottom-0 w-0 h-1 bg-green-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+    </Link>
+  </li>
           {/* Show Profile Icon and SignOutButton if logged in */}
           {isLoggedIn ? (
             <>
@@ -55,7 +76,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/sign-in"
-                className="flex bg-white items-center text-green-500 px-3 font-bold hover:bg-gray-100 text-xl rounded-lg shadow-md transition duration-300 ease-in-out hover:text-green-400"
+                className="flex bg-white items-center text-green-500 px-3 font-bold hover:bg-gray-100 text-2xl rounded-lg shadow-md transition duration-300 ease-in-out hover:text-green-400"
               >
                 Sign In
               </Link>

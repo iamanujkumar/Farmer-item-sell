@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ProductInfo from '../../Pages/ProductInfo/ProductInfo';
 
 interface Product {
   _id: number;
@@ -88,8 +89,8 @@ const RecommendationProducts: React.FC = () => {
               <div className="block font-sans text-xl antialiased font-normal leading-normal text-gray-700">
                 {renderStars(product.rating)}
               </div>
-              <button className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-                View More
+              <button className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" onClick={()=>navigate(`/productinfo/${product._id}`)}   >
+                View More 
               </button>
               
             </div>

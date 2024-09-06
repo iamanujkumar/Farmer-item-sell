@@ -6,9 +6,6 @@ import {
   FaBoxOpen, FaTools, FaLeaf, FaSprayCan, FaSun, FaTimes
 } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-=======
-import AllProduct from '../../Pages/AllProduct/AllProduct';
-import TripleCard from '../TripleCard/TripleCard';
 import AboutSection from '../AbousUs/AboutSection';
 
 function Category() {
@@ -141,7 +138,7 @@ function Category() {
       <div
         className={`fixed inset-y-0 left-0 transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:relative md:translate-x-0 w-72 max-w-xs bg-gradient-to-r from-green-50 to-emerald-100 p-6 transition-transform duration-300 ease-in-out z-50 overflow-y-auto`}
+        } md:relative md:translate-x-0 w-72 max-w-xs bg-green-100 p-6 transition-transform duration-300 ease-in-out z-50 overflow-y-auto`}
         style={{ maxHeight: '100vh' }}
       >
         {/* Close Button in Sidebar */}
@@ -244,12 +241,8 @@ function Category() {
           </div>
         </div>
       ) : (
-        <div className="flex-grow p-4">
-          <p className="text-gray-500">Select a category and item to see details.</p>
-        </div>
+        <AboutSection/>
       )}
-      </div>):(<AboutSection/>)}
-      
     </div>
   );
 }

@@ -29,7 +29,7 @@ const Mandi_Bhav: React.FC = () => {
   const fetchMarketPrices = async () => {
     try {
       // Base URL for the API
-      let apiUrl = `https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001d62c46748167463e438b041c5a0063c1&format=json&limit=20`;
+      let apiUrl =`https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001b94a35c0130d46a15f058383f452e7c4&format=json&limit=20`;
   
       // Adding filters based on user input
       if (state) {
@@ -45,7 +45,7 @@ const Mandi_Bhav: React.FC = () => {
       // Fetching the data
       const response = await axios.get(apiUrl);
       const data: MarketData[] = response.data.records.map((record: any) => ({
-        S_No: record.S_No,
+        S_No: record.S_No || record['S.No'], // Adjust based on actual API field name
         City: record.market,
         Commodity: record.commodity,
         Min_Prize: record.min_price,
@@ -54,22 +54,14 @@ const Mandi_Bhav: React.FC = () => {
       }));
   
       // Setting the state with the fetched data
+      console.log(data)
       setMarketData(data);
-      setFilteredData(data);
+      setFilteredData(data)  // Apply filtering after fetching data
     } catch (error) {
       console.error('Error fetching market prices:', error);
     }
   };
   
-
-  const handleSearch = () => {
-    const filtered = marketData.filter(item => 
-      (!commodity || item.Commodity.toLowerCase().includes(commodity.toLowerCase())) &&
-      (!state || item.City.toLowerCase().includes(state.toLowerCase())) &&
-      (!district || item.City.toLowerCase().includes(district.toLowerCase()))
-    );
-    setFilteredData(filtered);
-  };
 
   return (
     <div className="container mx-auto p-6 bg-green-100 rounded-lg shadow-lg">

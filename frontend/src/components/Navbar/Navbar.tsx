@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from "../../contexts/AppContext";
 import SignOutButton from "../SignOutButton";
 import { FaUserCircle,FaShoppingCart } from "react-icons/fa";
-=======
-import { FaUserCircle } from "react-icons/fa";
 import img from '../../assets/logo-two.png'
 
 const Navbar = () => {
@@ -59,7 +57,7 @@ const Navbar = () => {
     </Link>
   </li>
   <li className="text-slate-800 hover:underline font-medium font-sans cursor-pointer hover:text-green-600 transition duration-300 ease-in-out">
-    <Link to="/mandibhavs" className="relative group">
+    <Link to="/mandi-bhav" className="relative group">
       Mandi Bhav
       <span className="absolute left-0 bottom-0 w-0 h-1 bg-green-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
     </Link>

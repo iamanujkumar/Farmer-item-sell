@@ -1,21 +1,17 @@
 import Chatbot from "../components/ChatBot/Chatbot"
-import cover from '../assets/banner.jpg'
 import Category from "../components/Category/Category"
-import TripleCard from "../components/TripleCard/TripleCard"
-import AboutSection from "../components/AbousUs/AboutSection"
+import HeroSection from "./Hero/HeroSection"
 import SummarySection from "../components/Summery/SummarySection"
 
 const Home = () => {
   return (
     <div>
       <Chatbot/>
-      <img src={cover} alt="" />
-      
+      {/* <img src={cover} alt="" /> */}
+      <HeroSection/>
       <Category/>
-      hii
-      <div>
       <SummarySection/>
-      </div>
+     
     </div>
   )
 }

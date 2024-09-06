@@ -1,15 +1,15 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 
-export const SearchBar: React.FC = () => {
-  const [query, setQuery] = useState<string>('');
-  const [results, setResults] = useState<string[]>([]);
+const SearchBar = () => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  
+  const data = ["Apple", "Banana", "Carrot", "Cabbage", "Grapes", "Orange", "Onion", "Garlic"];
 
-  const data: string[] = ["Apple", "Banana", "Carrot", "Cabbage", "Grapes", "Orange", "Onion", "Garlic"];
-
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
+  const handleSearch = (e) => {
     const searchQuery = e.target.value;
     setQuery(searchQuery);
-
+    
     if (searchQuery.length > 0) {
       const filteredResults = data.filter(item =>
         item.toLowerCase().includes(searchQuery.toLowerCase())
@@ -21,7 +21,7 @@ export const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="relative max-w-md mx-auto my-8">
+    <div className="relative max-w-md mx-auto">
       <input
         type="text"
         value={query}
@@ -30,11 +30,11 @@ export const SearchBar: React.FC = () => {
         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
       />
       {results.length > 0 && (
-        <div className="absolute w-full mt-1 bg-white border border-gray-300 rounded shadow-lg">
+        <div className="absolute w-full bg-white border border-gray-300 rounded shadow-lg">
           {results.map((result, index) => (
             <div
               key={index}
-              className="px-4 py-2 cursor-pointer hover:bg-green-100"
+              className="px-4 py-1 cursor-pointer hover:bg-green-100"
             >
               {result}
             </div>
@@ -45,3 +45,4 @@ export const SearchBar: React.FC = () => {
   );
 };
 
+export default SearchBar;

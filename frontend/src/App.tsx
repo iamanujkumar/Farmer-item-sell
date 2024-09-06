@@ -25,6 +25,7 @@ function App() {
         <Route path="/register" element={<Layout><Register/></Layout>} />
         <Route path="/sign-in" element={<Layout><SignIn/></Layout>}/>
         <Route path="/productInfo/:id" element={<Layout><ProductInfo/></Layout>} />
+        <Route path="/cart" element={<Layout><Cart/></Layout>} />
         <Route path="/*" element={<NoPage/>}/>
         <Route path="/products" element={<Layout><AllProduct/></Layout>}/>
         <Route path="/mandi-bhav" element={<Layout><Mandi_Bhav/></Layout>}/>

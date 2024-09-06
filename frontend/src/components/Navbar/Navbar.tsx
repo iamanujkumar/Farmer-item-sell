@@ -65,12 +65,12 @@ const Navbar = () => {
           {/* Show Profile Icon and SignOutButton if logged in */}
           {isLoggedIn ? (
             <>
-              <li className="text-white cursor-pointer">
+              <li className="text-green-500 cursor-pointer">
                 <Link to="/add-cart" className="text-3xl hover:text-gray-300">
                   <FaShoppingCart />
                 </Link>
               </li>
-              <li className="text-white cursor-pointer">
+              <li className="text-green-500 cursor-pointer">
                 <Link to="/profile" className="text-3xl hover:text-gray-300">
                   <FaUserCircle />
                 </Link>

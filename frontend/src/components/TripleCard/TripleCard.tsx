@@ -5,8 +5,11 @@ import "swiper/css/free-mode";
 import { FreeMode, Pagination } from "swiper/modules";
 import { RxArrowTopRight } from "react-icons/rx";
 import { ServiceData } from "./constant";
+import { useNavigate } from "react-router-dom";
 
 const TripleCard = () => {
+    const navigate = useNavigate();
+    console.log(ServiceData);
   return (
       <Swiper
         breakpoints={{
@@ -32,6 +35,7 @@ const TripleCard = () => {
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${item.backgroundImage})` }}
+                
               />
               <div className="absolute inset-0 bg-black opacity-10 group-hover:opacity-50" />
               <div className="relative flex flex-col gap-3">
@@ -39,7 +43,8 @@ const TripleCard = () => {
                 <h1 className="text-xl lg:text-2xl">{item.title} </h1>
                 <p className="lg:text-[18px]">{item.content} </p>
               </div>
-              <RxArrowTopRight className="absolute bottom-5 left-5 w-[35px] h-[35px] text-white group-hover:text-blue-500 group-hover:rotate-45 duration-100" />
+              <button onClick={()=>navigate(`${item.url}`)} ><RxArrowTopRight className="absolute bottom-5 left-5 w-[35px] h-[35px] text-white group-hover:text-blue-500 group-hover:rotate-45 duration-100" /></button>
+              
             </div>
           </SwiperSlide>
         ))}

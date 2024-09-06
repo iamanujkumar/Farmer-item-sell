@@ -1,5 +1,5 @@
 import React from 'react';
-
+import backgroundImg from '../../assets/bg.png'
 import img1 from '../../assets/25off.png';
 import productImg1 from '../../assets/var.webp'; // Add your product image path here
 import productImg2 from '../../assets/green.avif'; 
@@ -8,7 +8,13 @@ import './Discount.css';
 
 const Discount: React.FC = () => {
   return (
-    <div>
+    <div style={{
+      backgroundImage: `url(${backgroundImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
+        position: 'relative'
+      }}>
       <section className="DiscountSection">
         <div className="img">
           <img src={img1} alt="25% Off" />

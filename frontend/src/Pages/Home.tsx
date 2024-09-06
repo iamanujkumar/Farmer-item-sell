@@ -15,7 +15,6 @@ const Home = () => {
       <Category/>
       <RecommendationProducts/>
       <SummarySection/>
-     <BusinessComponent/>
      <Discount/>
     </div>
   )

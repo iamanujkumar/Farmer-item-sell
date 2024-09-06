@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ProductInfo from '../../Pages/ProductInfo/ProductInfo';
+import bg from '../../assets/bg.png'
 
 interface Product {
   _id: number;
@@ -64,7 +65,13 @@ const RecommendationProducts: React.FC = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      backgroundImage: `url(${bg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'repeat',
+      position: 'relative'
+      }}>
       <h2 className="text-2xl font-bold text-slate-800 mb-6">Recommended Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.slice(0, visibleCount).map(product => (

@@ -11,6 +11,7 @@ import AllProduct from "./Pages/AllProduct/AllProduct";
 import ProductInfo from "./Pages/ProductInfo/ProductInfo";
 import Mandi_Bhav from "./Pages/Mandi_Bhav/Mandi_Bhav";
 import Cart from "./Pages/Cart/Cart";
+import About from "./Pages/About/About";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/*" element={<NoPage/>}/>
         <Route path="/products" element={<Layout><AllProduct/></Layout>}/>
         <Route path="/mandi-bhav" element={<Layout><Mandi_Bhav/></Layout>}/>
+        <Route path="/aboutus" element={<Layout><About/></Layout>}/>
        
         {isLoggedIn && (
           <>

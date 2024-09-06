@@ -1,5 +1,5 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaSeedling, FaTractor } from 'react-icons/fa';
-
+import logo from '../../assets/logo-two.png'
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-emerald-400 from-10% via-green-500 via-30% to-emerald-300 text-white py-10">
@@ -9,8 +9,7 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="mb-6 md:mb-0">
             <div className="flex items-center">
-              <FaSeedling className="text-green-300 text-3xl mr-2" />
-              <h1 className="text-2xl font-bold">AgriLife</h1>
+              <img src={logo} alt="" />
             </div>
             <p className="text-slate-200 mt-2">
               Connecting farmers to markets, sharing knowledge, and promoting sustainable agricultural practices.

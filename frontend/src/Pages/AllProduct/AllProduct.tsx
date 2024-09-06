@@ -115,7 +115,7 @@ const AllProduct = () => {
 
   return (
     <div className="bg-green-100 min-h-screen p-6 flex flex-col md:flex-row">
-      <FilterSection onFilterChange={setFilters} p={product} sp={setProduct} />
+      <FilterSection onFilterChange={setFilters}  />
       <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full h-full overflow-y-auto p-4">
         {filteredProducts.map((item, index) => {
           const { _id, imagesUrl, itemName, price, rating } = item;

@@ -1,7 +1,6 @@
 import {useDispatch,useSelector} from 'react-redux'
 import { decrementQuantity, deleteFromCart, increamentQuantity } from '../../redux/CartSlice';
 import { useEffect } from 'react';
-import {SearchBar} from '../../components/Search/Search';
 import { fetchCurrentUser } from '../../Api/userApi';
 
 const Cart = () => {
@@ -33,7 +32,6 @@ const Cart = () => {
 
     return (
             <div className="container mx-auto px-4 max-w-7xl">
-                <SearchBar />
                 <div className="mx-auto max-w-2xl py-8 lg:max-w-7xl">
                     <h1 className="text-3xl font-bold tracking-tight text-green-800 sm:text-4xl">
                         Your Cart

@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../Api/userApi";
 import { useAppContext } from "../contexts/AppContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import login from "../assets/login.jpg";
 
 export type SignInFormData = {
   email: string;
@@ -13,7 +14,6 @@ const SignIn = () => {
   const { showToast } = useAppContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
   const location = useLocation();
 
   const {
@@ -38,54 +38,64 @@ const SignIn = () => {
   });
 
   return (
-<form 
-  className="flex flex-col gap-5 m-auto mt-10 mb-10 w-[40%] border-2 border-green-500 p-5 rounded-lg" 
-  onSubmit={onSubmit}>
-      <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 m-auto">Sign In</h2>
-      <label className="text-gray-700 text-sm font-bold flex-1">
-        Email
-        <input
-          type="email"
-          className="border rounded w-full py-2 px-3 font-normal focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-          {...register("email", { required: "This field is required" })}
-        ></input>
-        {errors.email && (
-          <span className="text-red-500">{errors.email.message}</span>
-        )}
-      </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
-        Password
-        <input
-          type="password"
-          className="border rounded w-full py-2 px-3 font-normal focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-          {...register("password", {
-            required: "This field is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-        ></input>
-        {errors.password && (
-          <span className="text-green-500">{errors.password.message}</span>
-        )}
-      </label>
-      <span className="flex items-center justify-between mx-10 my-10">
-        <span className="text-sm">
-          Not Registered?{" "}
-          <Link className="underline text-green-500 hover:text-yellow-500" to="/register">
-            Create an account here
-          </Link>
-        </span>
-        <button
-          type="submit"
-          className="bg-blue-600 text-white p-2 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-yellow-500 hover:to-green-500 font-mono"
->
-          Login
-        </button>
-      </span>
-</form>
-
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <img
+        src={login}
+        alt="Background"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black opacity-40 backdrop-blur-md"></div>
+      <div className="relative z-10 p-6 md:p-12 bg-opacity-40 backdrop-blur-md border border-orange-200 rounded-lg shadow-lg w-full max-w-xl">
+        <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 mb-6 text-center">Sign In</h2>
+        <form 
+          className="flex flex-col gap-5"
+          onSubmit={onSubmit}
+        >
+          <label className="text-gray-700 text-sm font-bold">
+            Email
+            <input
+              type="email"
+              className="border border-gray-300 bg-gray-100 rounded w-full py-2 px-3 font-normal text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+              {...register("email", { required: "This field is required" })}
+            />
+            {errors.email && (
+              <span className="text-red-500">{errors.email.message}</span>
+            )}
+          </label>
+          <label className="text-gray-700 text-sm font-bold">
+            Password
+            <input
+              type="password"
+              className="border border-gray-300 bg-gray-100 rounded w-full py-2 px-3 font-normal text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              {...register("password", {
+                required: "This field is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
+            />
+            {errors.password && (
+              <span className="text-red-500">{errors.password.message}</span>
+            )}
+          </label>
+          <div className="flex items-center justify-between mt-6">
+            <span className="text-sm">
+              Not Registered?{" "}
+              <Link className="underline text-green-500 hover:text-yellow-500" to="/register">
+                Create an account here
+              </Link>
+            </span>
+            <button
+              type="submit"
+              className="bg-green-600 text-white p-2 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-yellow-500 hover:to-green-500 transition-all"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

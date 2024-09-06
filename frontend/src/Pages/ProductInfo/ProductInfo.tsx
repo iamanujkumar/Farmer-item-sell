@@ -3,37 +3,38 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart, deleteFromCart } from '../../redux/CartSlice';
+import ShareButton from '../../components/Share/Share';
 
 const ProductInfo = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const {id}  = useParams();
+  const [error, setError] = useState("");
+  const { id } = useParams();
 
-  const cartItems=useSelector((state)=>state.cart);
-  const dispatch=useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const addCart = (item) => {
-    // console.log(item)
     dispatch(addToCart(item));
-}
+  };
 
-const deleteCart = (item) => {
+  const deleteCart = (item) => {
     dispatch(deleteFromCart(item));
-}
+  };
 
   const getProduct = async () => {
     try {
       const response = await axios.get(`http://localhost:8000/api/searchItems/${id}`);
-      await setLoading(false);
-      console.log(response.data);
-      setProduct(response.data); // Accessing the nested data field
+      setLoading(false);
+      setProduct(response.data);
     } catch (error) {
+      setLoading(false);
+      setError('Error fetching product details.'); // Display a user-friendly error message
       console.error('Error fetching products:', error);
     }
   };
+
   useEffect(() => {
-    // Dummy data to simulate the product details
     getProduct();
   }, []);
 
@@ -97,21 +98,31 @@ const deleteCart = (item) => {
 
             {/* Buttons */}
             <div className="flex space-x-4">
-              {cartItems.some((p)=>p._id===product._id)?
-              <button 
-              onClick={() => deleteCart(product)}
-              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
-                Delete from Cart
-              </button>:
-              <button 
-              onClick={() => addCart(product)}
-              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all">
-                Add to Cart
-              </button>
-              }
+              {cartItems.some((p) => p._id === product._id) ? (
+                <button 
+                  onClick={() => deleteCart(product)}
+                  className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
+                >
+                  Delete from Cart
+                </button>
+              ) : (
+                <button 
+                  onClick={() => addCart(product)}
+                  className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
+                >
+                  Add to Cart
+                </button>
+              )}
               <button className="bg-green-800 text-white py-2 px-4 rounded hover:bg-green-900 transition-all">
                 Buy Now
               </button>
+              
+              {/* Share Button */}
+              <ShareButton 
+                title={`Check out this item: ${product.itemName}`} 
+                text={`I found this item on our e-commerce platform: ${product.itemName}. It costs ₹${product.price}/kg.`} 
+                url={window.location.href} 
+              />
             </div>
           </div>
         </div>

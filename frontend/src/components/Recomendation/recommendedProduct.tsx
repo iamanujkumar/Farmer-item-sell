@@ -91,11 +91,7 @@ const RecommendationProducts: React.FC = () => {
               <button className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
                 View More
               </button>
-              <ShareButton 
-                title={Check out this item: ${product.itemName}} 
-                text={I found this item on our e-commerce platform: ${product.itemName}. It costs ₹${product.price}/kg.} 
-                url={window.location.href} 
-              />
+              
             </div>
           </div>
         ))}

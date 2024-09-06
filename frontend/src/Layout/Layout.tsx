@@ -1,5 +1,6 @@
 
 // import BusinessComponent from "../components/BusinessComponent/BusinessComponent"
+import FAQSection from "../components/FAQ/FAQSection"
 import Header from "../components/Header"
 import Footer from "../Pages/Footer/Footer"
 interface Props {
@@ -13,8 +14,8 @@ const Layout = ({children}:Props)=>{
             {/* <div className="container mx-auto">
                 <SearchBar/>
             </div> */}
-            <div className="container mx-auto flex-1">{children}</div>
-            
+            <div className="">{children }</div>
+            <FAQSection/>
             <Footer/>
         </div>
     )  

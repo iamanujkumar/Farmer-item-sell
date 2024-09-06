@@ -9,9 +9,6 @@ const Header = () => {
 
       {/* Additional content for the header */}
       <div className="container mx-auto flex justify-between">
-        <span className="text-3xl text-white font-bold tracking-tight">
-          <Link to="/">Farmers</Link>
-        </span>
       </div>
     </div>
   );

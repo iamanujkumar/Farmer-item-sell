@@ -27,8 +27,8 @@ const TripleCard = () => {
         className="max-w-[90%] lg:max-w-[80%]"
       >
         {ServiceData.map((item) => (
-          <SwiperSlide key={item.title}>
-            <div className="flex flex-col gap-6 mb-20 group relative shadow-lg text-white rounded-xl px-6 py-8 h-[300px] w-[250px] lg:h-[500px] lg:w-[400px] overflow-hidden cursor-pointer"> {/* Increased sizes */}
+          <SwiperSlide key={item.title}> 
+            <div className="flex flex-col gap-6 mb-20 group relative shadow-lg text-white rounded-xl px-6 py-8 h-2/3 overflow-hidden mt-24 ml-8 cursor-pointer"> {/* Increased sizes */}
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${item.backgroundImage})` }}

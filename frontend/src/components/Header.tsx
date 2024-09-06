@@ -13,6 +13,8 @@ const Header = () => {
           <Link to="/">Farmers</Link>
         </span>
       </div> */}
+      <div className="container mx-auto flex justify-between">
+      </div>
     </div>
   );
 };

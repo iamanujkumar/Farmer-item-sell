@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart, deleteFromCart } from '../../redux/CartSlice';
@@ -9,13 +9,14 @@ const ProductInfo = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null); // State for selected image
   const { id } = useParams();
 
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const addCart = (item) => {
-    dispatch(addToCart(item));
+    dispatch(addToCart({ ...item, selectedImage })); // Pass selected image to the cart
   };
 
   const deleteCart = (item) => {
@@ -27,16 +28,27 @@ const ProductInfo = () => {
       const response = await axios.get(`http://localhost:8000/api/searchItems/${id}`);
       setLoading(false);
       setProduct(response.data);
+      setSelectedImage(response.data.imagesUrl[0]); // Default to first image
     } catch (error) {
       setLoading(false);
       setError('Error fetching product details.'); // Display a user-friendly error message
       console.error('Error fetching products:', error);
+      // setError('Error fetching product details');
     }
   };
 
   useEffect(() => {
     getProduct();
   }, []);
+
+  // Function to handle image repeating
+  const getRepeatedImages = (images) => {
+    const repeatedImages = [...images];
+    while (repeatedImages.length < 3) {
+      repeatedImages.push(...images);
+    }
+    return repeatedImages.slice(0, 3); // Ensure only 3 images are shown
+  };
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -72,13 +84,30 @@ const ProductInfo = () => {
     product && (
       <div className="bg-green-100 h-screen flex justify-center items-center p-4">
         <div className="bg-white/30 backdrop-blur-lg rounded-lg shadow-lg w-full h-full md:w-5/6 md:h-5/6 lg:w-4/5 lg:h-4/5 max-w-7xl max-h-4xl p-6 flex flex-col md:flex-row">
-          {/* Big Image */}
-          <div className="w-full md:w-1/2 h-1/2 md:h-full mb-4 md:mb-0 md:mr-4">
-            <img
-              src={product.imagesUrl[0]}
-              alt={product.itemName}
-              className="w-full h-full object-cover rounded-md"
-            />
+          {/* Big Image Container */}
+          <div className="w-full md:w-1/2 flex flex-col justify-between mb-4 md:mb-0 md:mr-4">
+            {/* Main Image */}
+            <div className="flex-1">
+              <img
+                src={selectedImage} // Show selected image
+                alt={product.itemName}
+                className="w-full h-[80%] object-cover rounded-md" // Adjust height to fit small images
+              />
+            </div>
+
+            {/* Small Images (Thumbnails) */}
+            <div className="flex justify-center mt-4 space-x-4">
+              {getRepeatedImages(product.imagesUrl).map((imageUrl, index) => (
+                <img
+                  key={index}
+                  src={imageUrl}
+                  alt={`Thumbnail ${index + 1}`}
+                  className={`w-20 h-20 object-cover cursor-pointer rounded-md border-2 transition-all 
+                    ${selectedImage === imageUrl ? 'border-green-500 bg-green-200' : 'border-transparent bg-white'}`} // Background changes when clicked
+                  onClick={() => setSelectedImage(imageUrl)} // Update selected image on click
+                />
+              ))}
+            </div>
           </div>
 
           {/* Product Details */}
@@ -93,20 +122,22 @@ const ProductInfo = () => {
             {/* Location */}
             <div className="mb-4">
               <h3 className="font-medium text-gray-800">Location:</h3>
-              <p className="text-gray-600">{product.city}, {product.state}</p>
+              <p className="text-gray-600">
+                {product.city}, {product.state}
+              </p>
             </div>
 
             {/* Buttons */}
             <div className="flex space-x-4">
               {cartItems.some((p) => p._id === product._id) ? (
-                <button 
+                <button
                   onClick={() => deleteCart(product)}
                   className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
                 >
                   Delete from Cart
                 </button>
               ) : (
-                <button 
+                <button
                   onClick={() => addCart(product)}
                   className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 transition-all"
                 >

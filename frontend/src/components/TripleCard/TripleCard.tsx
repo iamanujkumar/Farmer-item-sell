@@ -35,7 +35,6 @@ const TripleCard = () => {
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${item.backgroundImage})` }}
-                
               />
               <div className="absolute inset-0 bg-black opacity-10 group-hover:opacity-50" />
               <div className="relative flex flex-col gap-3">
@@ -44,7 +43,6 @@ const TripleCard = () => {
                 <p className="lg:text-[18px]">{item.content} </p>
               </div>
               <button onClick={()=>navigate(`${item.url}`)} ><RxArrowTopRight className="absolute bottom-5 left-5 w-[35px] h-[35px] text-white group-hover:text-blue-500 group-hover:rotate-45 duration-100" /></button>
-              
             </div>
           </SwiperSlide>
         ))}

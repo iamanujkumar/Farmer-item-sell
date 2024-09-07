@@ -65,56 +65,69 @@ const RecommendationProducts: React.FC = () => {
   };
 
   return (
-    <div style={{
-      backgroundImage: `url(${bg})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'repeat',
-      position: 'relative'
-      }}>
-      <h2 className="text-2xl font-bold text-slate-800 mb-6">Recommended Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.slice(0, visibleCount).map(product => (
-          <div key={product._id} className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-66">
-            <div className="relative p-2.5 overflow-hidden rounded-xl bg-clip-border" style={{ height: '200px', width: '350px' }}>
-              <img
-                src={product.imagesUrl[0]}
-                alt={product.title}
-                onClick={() => navigate(`/productinfo/${product._id}`)}
-                className="object-cover w-full h-full rounded-md"
-              />
-            </div>
-            <div className="p-4">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="text-slate-800 text-xl font-semibold">
-                  {product.title}
-                </p>
-                <p className="text-cyan-600 text-xl font-semibold">
-                  Rs - {product.price}
-                </p>
-              </div>
-              <div className="block font-sans text-xl antialiased font-normal leading-normal text-gray-700">
-                {renderStars(product.rating)}
-              </div>
-              <button className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" onClick={()=>navigate(`/productinfo/${product._id}`)}   >
-                View More 
-              </button>
-              
-            </div>
-          </div>
-        ))}
-      </div>
-      {visibleCount < products.length && (
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={showMoreProducts}
-            className="bg-cyan-600 text-white px-4 py-2 rounded-md transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700"
+    <div
+  style={{
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'repeat',
+    position: 'relative',
+  }}
+>
+  <div className="flex flex-col items-center"> {/* Flexbox to center content */}
+    <h2 className="text-2xl mt-8 font-bold text-slate-800 mb-6 text-center">
+      Recommended Products
+    </h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"> {/* Center grid and set max width */}
+      {products.slice(0, visibleCount).map((product) => (
+        <div
+          key={product._id}
+          className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-66"
+        >
+          <div
+            className="relative p-2.5 overflow-hidden rounded-xl bg-clip-border"
+            style={{ height: '200px', width: '350px' }}
           >
-            Show More
-          </button>
+            <img
+              src={product.imagesUrl[0]}
+              alt={product.title}
+              onClick={() => navigate(`/productinfo/${product._id}`)}
+              className="object-contain w-3/4 h-full rounded-md"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+          <div className="p-4">
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-slate-800 text-xl font-semibold">{product.title}</p>
+              <p className="text-cyan-600 text-xl font-semibold">Rs - {product.price}</p>
+            </div>
+            <div className="block font-sans text-xl antialiased font-normal leading-normal text-gray-700">
+              {renderStars(product.rating)}
+            </div>
+            <button
+              className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              onClick={() => navigate(`/productinfo/${product._id}`)}
+            >
+              View More
+            </button>
+          </div>
         </div>
-      )}
+      ))}
     </div>
+    {visibleCount < products.length && (
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={showMoreProducts}
+          className="bg-cyan-600 text-white px-4 py-2 rounded-md transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 active:bg-cyan-700"
+        >
+          Show More
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+
   );
 };
 

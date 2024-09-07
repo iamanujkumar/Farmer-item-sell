@@ -15,7 +15,6 @@ const Layout = ({children}:Props)=>{
                 <SearchBar/>
             </div> */}
             <div className="">{children }</div>
-            <FAQSection/>
             <Footer/>
         </div>
     )  

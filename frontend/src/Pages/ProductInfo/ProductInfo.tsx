@@ -181,7 +181,7 @@ const ProductInfo = () => {
             </div>
           </div>
         </div>
-      </div>
+      
     )
   );
 };
